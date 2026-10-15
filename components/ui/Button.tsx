@@ -34,7 +34,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const baseStyles =
-      'inline-flex items-center justify-center font-medium rounded-full transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-[#CE3627]/20 disabled:opacity-50 disabled:pointer-events-none active:scale-[0.98] select-none cursor-pointer';
+      'inline-flex flex-row items-center justify-center font-medium rounded-full transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-[#CE3627]/20 disabled:opacity-50 disabled:pointer-events-none active:scale-[0.98] select-none cursor-pointer whitespace-nowrap';
 
     const variants = {
       primary: 'bg-[#CE3627] text-white hover:bg-[#B72E20] shadow-sm font-semibold',
@@ -65,9 +65,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {isLoading && (
           <span className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin shrink-0" />
         )}
-        {!isLoading && leftIcon && <span className="shrink-0">{leftIcon}</span>}
-        {children && <span>{children}</span>}
-        {!isLoading && rightIcon && <span className="shrink-0">{rightIcon}</span>}
+        {!isLoading && leftIcon && <span className="shrink-0 flex items-center">{leftIcon}</span>}
+        {children}
+        {!isLoading && rightIcon && <span className="shrink-0 flex items-center">{rightIcon}</span>}
       </button>
     );
   }

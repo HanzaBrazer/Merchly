@@ -100,10 +100,10 @@ export function AdjustWidgetModal({
             onClose();
             onOpenNewOrder();
           }}
-          className="rounded-full text-xs"
+          className="rounded-full text-xs flex items-center gap-1.5 whitespace-nowrap"
         >
-          <Plus className="w-3.5 h-3.5 text-[#CE3627]" />
-          <span>+ New Order</span>
+          <Plus className="w-3.5 h-3.5 text-[#CE3627] shrink-0" />
+          <span>New Order</span>
         </Button>
 
         <Button

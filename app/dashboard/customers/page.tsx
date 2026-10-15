@@ -70,11 +70,11 @@ export default function CustomersPage() {
           <Button
             variant="primary"
             size="md"
-            className="text-xs sm:text-sm font-semibold"
+            className="text-xs sm:text-sm font-semibold flex items-center gap-2 whitespace-nowrap"
             onClick={() => setIsAddCustomerOpen(true)}
           >
-            <Plus className="w-4 h-4" />
-            <span>+ Add Customer</span>
+            <Plus className="w-4 h-4 shrink-0" />
+            <span>Add Customer</span>
           </Button>
         </div>
 

@@ -62,11 +62,11 @@ export default function OrdersPage() {
             <Button
               variant="primary"
               size="md"
-              className="text-xs sm:text-sm font-semibold"
+              className="text-xs sm:text-sm font-semibold flex items-center gap-2 whitespace-nowrap"
               onClick={() => setIsNewOrderModalOpen(true)}
             >
-              <Plus className="w-4 h-4" />
-              <span>+ New Order</span>
+              <Plus className="w-4 h-4 shrink-0" />
+              <span>New Order</span>
             </Button>
           </div>
         </div>

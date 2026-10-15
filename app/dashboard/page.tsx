@@ -226,15 +226,15 @@ export default function DashboardPage() {
                   <span>Filter</span>
                 </button>
 
-                {/* + New Order Action */}
+                {/* New Order Action */}
                 <Button
                   variant="primary"
                   size="sm"
                   onClick={() => setIsNewOrderModalOpen(true)}
-                  className="h-11 px-5 rounded-full text-sm font-semibold shadow-xs"
+                  className="h-11 px-5 rounded-full text-sm font-semibold shadow-xs flex items-center gap-2 whitespace-nowrap"
                 >
-                  <Plus className="w-4 h-4" />
-                  <span>+ New Order</span>
+                  <Plus className="w-4 h-4 shrink-0" />
+                  <span>New Order</span>
                 </Button>
               </div>
             </div>
