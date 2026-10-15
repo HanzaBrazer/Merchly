@@ -5,7 +5,8 @@ import { useRouter } from 'next/navigation';
 import { useMerchly } from '@/lib/store';
 import { MemberRole } from '@/lib/types';
 import { toast } from 'sonner';
-import { X, UserPlus, Check, Sparkles, Shield, ArrowLeft, ExternalLink, Settings2 } from 'lucide-react';
+import { X, UserPlus, Check, Sparkles, Shield, ArrowLeft, ExternalLink, Settings2, Database, Globe } from 'lucide-react';
+import { supabase, isSupabaseConfigured } from '@/lib/supabase/client';
 
 interface GoogleAuthModalProps {
   isOpen: boolean;
@@ -102,6 +103,29 @@ export function GoogleAuthModal({
       onClose();
       router.push(redirectPath);
     }, 400);
+  };
+
+  const handleSupabaseGoogleOAuth = async () => {
+    if (!isSupabaseConfigured) {
+      toast.info('Supabase Anon Key belum diisi di .env.local. Gunakan pilihan akun di bawah untuk login instan.');
+      return;
+    }
+    setIsSubmitting(true);
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/auth/callback?next=${redirectPath}`,
+        },
+      });
+      if (error) {
+        toast.error('Supabase OAuth error: ' + error.message);
+        setIsSubmitting(false);
+      }
+    } catch (err: any) {
+      toast.error('Gagal membuka Supabase Google OAuth: ' + (err?.message || 'Error'));
+      setIsSubmitting(false);
+    }
   };
 
   const handleCustomGoogleSubmit = (e: React.FormEvent) => {
@@ -275,6 +299,33 @@ export function GoogleAuthModal({
                     <strong className="text-[#15803D]">💼 Staff (Sarah Amelia)</strong>: Pemenuhan pesanan (Fulfillment), live chat Gemini &amp; tiket pembeli.
                   </li>
                 </ul>
+              </div>
+
+              {/* Supabase Integration Info */}
+              <div className="p-3 rounded-2xl bg-[#F0FDF4] border border-[#BBF7D0] flex items-center justify-between text-xs">
+                <div className="flex items-center gap-2 min-w-0">
+                  <Database className="w-4 h-4 text-[#16A34A] shrink-0" />
+                  <div className="min-w-0">
+                    <p className="font-semibold text-[#166534] truncate">Supabase Cloud Connected</p>
+                    <p className="text-[10px] text-[#15803D] font-mono truncate">
+                      vsoxcoawjcgbppxcsrch.supabase.co
+                    </p>
+                  </div>
+                </div>
+                {isSupabaseConfigured ? (
+                  <button
+                    type="button"
+                    onClick={handleSupabaseGoogleOAuth}
+                    className="px-2.5 py-1 rounded-full bg-[#16A34A] hover:bg-[#15803D] text-white text-[11px] font-bold transition-colors shrink-0 cursor-pointer shadow-xs"
+                    title="Jalankan Google OAuth via Supabase"
+                  >
+                    Live OAuth
+                  </button>
+                ) : (
+                  <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-white text-[#15803D] border border-[#BBF7D0] shrink-0">
+                    Siap Anon Key
+                  </span>
+                )}
               </div>
             </div>
           ) : (
