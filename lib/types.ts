@@ -110,3 +110,12 @@ export interface Workspace {
   currentPeriodEnd?: string;
   category?: string;
 }
+
+export interface CurrentUser {
+  id: string;
+  name: string;
+  email: string;
+  role: MemberRole;
+  avatar: string;
+}
+

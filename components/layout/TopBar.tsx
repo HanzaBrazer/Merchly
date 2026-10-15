@@ -12,6 +12,7 @@ import {
   User,
   ShieldCheck,
   Building2,
+  LogOut,
 } from 'lucide-react';
 import { useMerchly } from '@/lib/store';
 import { Logo } from '@/components/ui/Logo';
@@ -22,7 +23,14 @@ interface TopBarProps {
 }
 
 export function TopBar({ onOpenMobileMenu }: TopBarProps) {
-  const { workspace, setIsSearchModalOpen, resetToInitialDemo, setIsUpgradeModalOpen } = useMerchly();
+  const {
+    workspace,
+    currentUser,
+    setIsSearchModalOpen,
+    resetToInitialDemo,
+    setIsUpgradeModalOpen,
+    setIsLogoutModalOpen,
+  } = useMerchly();
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const [isNotifOpen, setIsNotifOpen] = useState(false);
 
@@ -119,6 +127,7 @@ export function TopBar({ onOpenMobileMenu }: TopBarProps) {
         </div>
 
         {/* User Profile Pill (Figma Replica) */}
+        {/* User Profile Pill (Figma Replica) */}
         <div className="relative">
           <button
             onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
@@ -126,11 +135,13 @@ export function TopBar({ onOpenMobileMenu }: TopBarProps) {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80"
-              alt="Brian"
+              src={currentUser?.avatar || "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80"}
+              alt={currentUser?.name || "Raihan Fahreza"}
               className="w-7 h-7 rounded-full object-cover"
             />
-            <span className="text-sm font-medium text-[#000000]">Brian</span>
+            <span className="text-sm font-medium text-[#000000]">
+              {currentUser?.name ? currentUser.name.split(' ')[0] : 'Raihan'}
+            </span>
             <ChevronDown className="w-3.5 h-3.5 text-[#71717A]" />
           </button>
 
@@ -138,8 +149,8 @@ export function TopBar({ onOpenMobileMenu }: TopBarProps) {
           {isProfileMenuOpen && (
             <div className="absolute right-0 mt-2 w-64 bg-white rounded-2xl shadow-xl border border-[#E2E2E2] p-2 z-50 text-sm">
               <div className="px-3 py-2 border-b border-[#E2E2E2]/60">
-                <p className="font-semibold text-[#000000]">Brian Vance</p>
-                <p className="text-xs text-[#71717A]">brian@merchly.com • Owner</p>
+                <p className="font-semibold text-[#000000]">{currentUser?.name || 'Raihan Fahreza'}</p>
+                <p className="text-xs text-[#71717A]">{currentUser?.email || 'raihan@merchly.com'} • Owner</p>
               </div>
 
               <div className="py-1">
@@ -176,14 +187,16 @@ export function TopBar({ onOpenMobileMenu }: TopBarProps) {
               </div>
 
               <div className="pt-1 border-t border-[#E2E2E2]/60">
-                <Link
-                  href="/login"
-                  onClick={() => setIsProfileMenuOpen(false)}
-                  className="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-[#FFE6E7] text-[#FF0013]"
+                <button
+                  onClick={() => {
+                    setIsProfileMenuOpen(false);
+                    setIsLogoutModalOpen(true);
+                  }}
+                  className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-[#FEF1ED] text-[#CE3627] font-medium transition-colors text-left"
                 >
-                  <ShieldCheck className="w-4 h-4" />
-                  <span>Log out</span>
-                </Link>
+                  <LogOut className="w-4 h-4 text-[#CE3627]" />
+                  <span>Keluar / Log out</span>
+                </button>
               </div>
             </div>
           )}

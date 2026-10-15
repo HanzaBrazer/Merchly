@@ -209,7 +209,7 @@ export default function SettingsPage() {
                           <div className="flex items-center gap-3">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
-                              src={member.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120'}
+                              src={member.avatar || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80'}
                               alt={member.name}
                               className="w-8 h-8 rounded-full object-cover"
                             />

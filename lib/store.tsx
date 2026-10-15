@@ -13,6 +13,7 @@ import {
   OrderStatus,
   StockStatus,
   ProductStatus,
+  CurrentUser,
 } from './types';
 import {
   initialWorkspace,
@@ -27,6 +28,13 @@ import { canAccess, PLAN_LIMITS } from './permissions';
 import { toast } from 'sonner';
 
 interface MerchlyContextType {
+  currentUser: CurrentUser | null;
+  isAuthenticated: boolean;
+  isLogoutModalOpen: boolean;
+  setIsLogoutModalOpen: (open: boolean) => void;
+  login: (email?: string, name?: string) => void;
+  logout: () => void;
+  register: (email: string, name?: string) => void;
   workspace: Workspace;
   products: Product[];
   orders: Order[];
@@ -81,8 +89,13 @@ interface MerchlyContextType {
 const MerchlyContext = createContext<MerchlyContextType | undefined>(undefined);
 
 const STORAGE_KEY = 'merchly_app_state_v1';
+const AUTH_STORAGE_KEY = 'merchly_auth_session';
 
 export function MerchlyProvider({ children }: { children: ReactNode }) {
+  const [currentUser, setCurrentUser] = useState<CurrentUser | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+
   const [workspace, setWorkspace] = useState<Workspace>(initialWorkspace);
   const [products, setProducts] = useState<Product[]>(initialProducts);
   const [orders, setOrders] = useState<Order[]>(initialOrders);
@@ -101,6 +114,16 @@ export function MerchlyProvider({ children }: { children: ReactNode }) {
   // Load from local storage
   useEffect(() => {
     try {
+      // Check auth session
+      const savedAuth = localStorage.getItem(AUTH_STORAGE_KEY);
+      if (savedAuth) {
+        const parsedAuth = JSON.parse(savedAuth);
+        if (parsedAuth && parsedAuth.name) {
+          setCurrentUser(parsedAuth);
+          setIsAuthenticated(true);
+        }
+      }
+
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
@@ -116,6 +139,38 @@ export function MerchlyProvider({ children }: { children: ReactNode }) {
       console.warn('Could not read from localStorage', e);
     }
   }, []);
+
+  const login = (email?: string, name?: string) => {
+    const user: CurrentUser = {
+      id: 'user-raihan-01',
+      name: name || 'Raihan Fahreza',
+      email: email || 'raihan@merchly.com',
+      role: 'owner',
+      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80',
+    };
+    setCurrentUser(user);
+    setIsAuthenticated(true);
+    try {
+      localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(user));
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const logout = () => {
+    setCurrentUser(null);
+    setIsAuthenticated(false);
+    setIsLogoutModalOpen(false);
+    try {
+      localStorage.removeItem(AUTH_STORAGE_KEY);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const register = (email: string, name?: string) => {
+    login(email, name);
+  };
 
   // Save to local storage
   const saveState = (newState: {
@@ -527,6 +582,13 @@ export function MerchlyProvider({ children }: { children: ReactNode }) {
   return (
     <MerchlyContext.Provider
       value={{
+        currentUser,
+        isAuthenticated,
+        isLogoutModalOpen,
+        setIsLogoutModalOpen,
+        login,
+        logout,
+        register,
         workspace,
         products,
         orders,

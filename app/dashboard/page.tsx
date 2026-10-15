@@ -24,7 +24,7 @@ import { ProductModal } from '@/components/products/ProductModal';
 import Link from 'next/link';
 
 export default function DashboardPage() {
-  const { orders, customers, products, setSelectedOrder, setIsNewOrderModalOpen } = useMerchly();
+  const { orders, customers, products, currentUser, setSelectedOrder, setIsNewOrderModalOpen } = useMerchly();
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
 
   // Compute live metrics
@@ -46,7 +46,7 @@ export default function DashboardPage() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#000000]">
-              Welcome back, Brian!
+              Welcome back, {currentUser?.name ? currentUser.name.split(' ')[0] : 'Raihan'}!
             </h1>
             <p className="text-sm text-[#71717A] mt-1">Here is your dashboard overview</p>
           </div>

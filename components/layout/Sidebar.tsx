@@ -14,6 +14,7 @@ import {
   Plus,
   Sparkles,
   ExternalLink,
+  LogOut,
 } from 'lucide-react';
 import { Logo } from '@/components/ui/Logo';
 import { Button } from '@/components/ui/Button';
@@ -26,7 +27,7 @@ interface SidebarProps {
 
 export function Sidebar({ onItemClick }: SidebarProps) {
   const pathname = usePathname();
-  const { conversations, setIsUpgradeModalOpen, workspace } = useMerchly();
+  const { conversations, setIsUpgradeModalOpen, setIsLogoutModalOpen, workspace, currentUser } = useMerchly();
 
   const totalUnreadChats = conversations.reduce((acc, c) => acc + c.unreadCount, 0);
 
@@ -188,6 +189,22 @@ export function Sidebar({ onItemClick }: SidebarProps) {
             {workspace.plan === 'FREE' ? 'Upgrade Plan' : 'Manage Pro Plan'}
           </Button>
         </div>
+
+        <button
+          onClick={() => {
+            if (onItemClick) onItemClick();
+            setIsLogoutModalOpen(true);
+          }}
+          className="w-full mt-2.5 flex items-center justify-between px-3 py-2 rounded-2xl text-xs font-medium text-[#71717A] hover:text-[#CE3627] hover:bg-[#FEF1ED] transition-colors"
+        >
+          <div className="flex items-center gap-2">
+            <LogOut className="w-4 h-4 text-[#71717A]" />
+            <span>Keluar / Logout</span>
+          </div>
+          <span className="text-[10px] bg-[#F6F6F6] border border-[#E2E2E2] px-1.5 py-0.5 rounded-full text-[#71717A]">
+            {currentUser?.name ? currentUser.name.split(' ')[0] : 'Raihan'}
+          </span>
+        </button>
       </div>
     </aside>
   );

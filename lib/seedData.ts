@@ -12,11 +12,11 @@ export const initialWorkspace: Workspace = {
 
 export const initialTeamMembers: TeamMember[] = [
   {
-    id: 'user-brian-01',
-    name: 'Brian Vance',
-    email: 'brian@merchly.com',
+    id: 'user-raihan-01',
+    name: 'Raihan Fahreza',
+    email: 'raihan@merchly.com',
     role: 'owner',
-    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80',
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80',
     joinedAt: '2025-01-10',
   },
   {

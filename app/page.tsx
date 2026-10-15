@@ -45,7 +45,7 @@ export default function LandingPage() {
               Sign In
             </Button>
           </Link>
-          <Link href="/dashboard">
+          <Link href="/login?redirect=/dashboard">
             <Button variant="primary" size="sm" className="text-xs font-bold shadow-xs">
               Live Demo
             </Button>
@@ -75,7 +75,7 @@ export default function LandingPage() {
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 mt-8">
-          <Link href="/dashboard">
+          <Link href="/login?redirect=/dashboard">
             <Button variant="primary" size="lg" className="w-full sm:w-auto font-bold px-8 shadow-md">
               <span>Launch Demo Dashboard</span>
               <ArrowRight className="w-4 h-4 ml-1" />
@@ -257,12 +257,12 @@ export default function LandingPage() {
           <div className="flex items-center justify-center gap-3">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80"
-              alt="Brian"
+              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80"
+              alt="Raihan Fahreza"
               className="w-10 h-10 rounded-full object-cover border-2 border-[#CE3627]"
             />
             <div className="text-left">
-              <p className="font-bold text-sm text-white">Brian Vance</p>
+              <p className="font-bold text-sm text-white">Raihan Fahreza</p>
               <p className="text-xs text-[#FF7A6B]">Store Owner, Nordic Furniture</p>
             </div>
           </div>
@@ -311,7 +311,7 @@ export default function LandingPage() {
                 </ul>
               </div>
 
-              <Link href="/dashboard" className="mt-8">
+              <Link href="/register" className="mt-8">
                 <Button variant="outline" size="md" className="w-full text-xs font-semibold">
                   Get Started Free
                 </Button>
@@ -357,7 +357,7 @@ export default function LandingPage() {
                 </ul>
               </div>
 
-              <Link href="/dashboard" className="mt-8">
+              <Link href="/register" className="mt-8">
                 <Button variant="primary" size="md" className="w-full text-xs font-bold shadow-xs">
                   Upgrade to Pro
                 </Button>
@@ -396,7 +396,7 @@ export default function LandingPage() {
                 </ul>
               </div>
 
-              <Link href="/dashboard" className="mt-8">
+              <Link href="/register" className="mt-8">
                 <Button variant="outline" size="md" className="w-full text-xs font-semibold">
                   Contact Sales / Enterprise
                 </Button>
@@ -418,7 +418,7 @@ export default function LandingPage() {
             <Link href="/track" className="hover:underline">
               Tracking Portal
             </Link>
-            <Link href="/dashboard" className="hover:underline font-semibold text-[#CE3627]">
+            <Link href="/login?redirect=/dashboard" className="hover:underline font-semibold text-[#CE3627]">
               Dashboard
             </Link>
           </div>
