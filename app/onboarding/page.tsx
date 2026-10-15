@@ -56,7 +56,7 @@ export default function OnboardingPage() {
       {/* Top Header */}
       <header className="w-full max-w-2xl mx-auto pt-6 flex items-center justify-between">
         <Logo className="w-9 h-9" />
-        <span className="text-xs font-semibold text-[#1D4840] bg-[#E8EDEC] px-3 py-1 rounded-full">
+        <span className="text-xs font-semibold text-[#CE3627] bg-[#FEF1ED] border border-[#F7D7D1] px-3 py-1 rounded-full">
           Step {step} of 3
         </span>
       </header>
@@ -68,7 +68,7 @@ export default function OnboardingPage() {
           {step === 1 && (
             <div className="space-y-6 animate-in fade-in duration-200">
               <div>
-                <span className="text-xs font-bold text-[#1D4840] tracking-wider uppercase block mb-1">
+                <span className="text-xs font-bold text-[#CE3627] tracking-wider uppercase block mb-1">
                   Step 1/3
                 </span>
                 <h2 className="text-2xl sm:text-3xl font-extrabold text-[#000000]">
@@ -97,14 +97,14 @@ export default function OnboardingPage() {
                         className={cn(
                           'p-4 rounded-2xl border-2 flex items-center gap-3.5 cursor-pointer transition-all select-none',
                           isSelected
-                            ? 'border-[#97DF68] bg-[#F5FCF0] text-[#1D4840] font-semibold ring-2 ring-[#97DF68]/20'
-                            : 'border-[#E2E2E2] bg-white text-[#000000] hover:border-[#1D4840]/30'
+                            ? 'border-[#CE3627] bg-[#FEF1ED] text-[#CE3627] font-semibold ring-2 ring-[#CE3627]/20'
+                            : 'border-[#E2E2E2] bg-white text-[#000000] hover:border-[#CE3627]/30'
                         )}
                       >
                         <div
                           className={cn(
                             'w-9 h-9 rounded-xl flex items-center justify-center shrink-0',
-                            isSelected ? 'bg-[#97DF68] text-[#1D4840]' : 'bg-[#F6F6F6] text-[#71717A]'
+                            isSelected ? 'bg-[#CE3627] text-white' : 'bg-[#F6F6F6] text-[#71717A]'
                           )}
                         >
                           <Icon className="w-5 h-5" />
@@ -125,7 +125,7 @@ export default function OnboardingPage() {
                   Skip for now
                 </button>
                 <Button
-                  variant="mint"
+                  variant="primary"
                   size="md"
                   className="font-bold px-6"
                   onClick={() => setStep(2)}
@@ -141,7 +141,7 @@ export default function OnboardingPage() {
           {step === 2 && (
             <div className="space-y-6 animate-in fade-in duration-200">
               <div>
-                <span className="text-xs font-bold text-[#1D4840] tracking-wider uppercase block mb-1">
+                <span className="text-xs font-bold text-[#CE3627] tracking-wider uppercase block mb-1">
                   Step 2/3
                 </span>
                 <h2 className="text-2xl sm:text-3xl font-extrabold text-[#000000]">
@@ -161,7 +161,7 @@ export default function OnboardingPage() {
                     type="text"
                     value={storeName}
                     onChange={(e) => setStoreName(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#1D4840] text-sm"
+                    className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#CE3627] text-sm"
                     required
                   />
                 </div>
@@ -174,7 +174,7 @@ export default function OnboardingPage() {
                     type="number"
                     value={targetSales}
                     onChange={(e) => setTargetSales(Number(e.target.value))}
-                    className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#1D4840] text-sm"
+                    className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#CE3627] text-sm"
                     required
                   />
                   <p className="text-[11px] text-[#71717A] mt-1">
@@ -192,7 +192,7 @@ export default function OnboardingPage() {
                   Back
                 </button>
                 <Button
-                  variant="mint"
+                  variant="primary"
                   size="md"
                   className="font-bold px-6"
                   onClick={() => setStep(3)}
@@ -208,7 +208,7 @@ export default function OnboardingPage() {
           {step === 3 && (
             <div className="space-y-6 animate-in fade-in duration-200">
               <div>
-                <span className="text-xs font-bold text-[#1D4840] tracking-wider uppercase block mb-1">
+                <span className="text-xs font-bold text-[#CE3627] tracking-wider uppercase block mb-1">
                   Step 3/3
                 </span>
                 <h2 className="text-2xl sm:text-3xl font-extrabold text-[#000000]">
@@ -235,8 +235,8 @@ export default function OnboardingPage() {
                       className={cn(
                         'p-4 rounded-2xl border-2 flex items-center justify-between cursor-pointer transition-all select-none',
                         isChecked
-                          ? 'border-[#97DF68] bg-[#F5FCF0]'
-                          : 'border-[#E2E2E2] bg-white hover:border-[#1D4840]/30'
+                          ? 'border-[#CE3627] bg-[#FEF1ED]'
+                          : 'border-[#E2E2E2] bg-white hover:border-[#CE3627]/30'
                       )}
                     >
                       <div>
@@ -248,7 +248,7 @@ export default function OnboardingPage() {
                         className={cn(
                           'w-6 h-6 rounded-full flex items-center justify-center border-2',
                           isChecked
-                            ? 'bg-[#1D4840] border-[#1D4840] text-white'
+                            ? 'bg-[#CE3627] border-[#CE3627] text-white'
                             : 'border-[#D3D3D3]'
                         )}
                       >
@@ -268,7 +268,7 @@ export default function OnboardingPage() {
                   Back
                 </button>
                 <Button
-                  variant="mint"
+                  variant="primary"
                   size="lg"
                   className="font-bold px-8"
                   onClick={handleFinish}

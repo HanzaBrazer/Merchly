@@ -47,7 +47,7 @@ export default function PublicTrackingPage() {
       {/* Main Content */}
       <main className="flex-1 max-w-2xl w-full mx-auto p-4 sm:p-6 my-8">
         <div className="text-center mb-8">
-          <span className="text-xs font-bold text-[#1D4840] bg-[#E8EDEC] px-3 py-1 rounded-full uppercase tracking-wider">
+          <span className="text-xs font-bold text-[#CE3627] bg-[#FEF1ED] border border-[#F7D7D1] px-3 py-1 rounded-full uppercase tracking-wider">
             Public Tracking Portal
           </span>
           <h1 className="text-3xl font-extrabold text-[#000000] mt-3">Track Your Order</h1>
@@ -68,7 +68,7 @@ export default function PublicTrackingPage() {
               className="w-full px-2 py-2 text-sm bg-transparent focus:outline-none text-[#000000]"
               autoFocus
             />
-            <Button type="submit" variant="mint" size="md" className="shrink-0 font-bold px-6">
+            <Button type="submit" variant="primary" size="md" className="shrink-0 font-bold px-6">
               Track
             </Button>
           </div>
@@ -92,7 +92,7 @@ export default function PublicTrackingPage() {
                 {/* Progress Steps */}
                 <div className="grid grid-cols-3 gap-2 text-center text-xs">
                   <div className="flex flex-col items-center">
-                    <div className="w-8 h-8 rounded-full bg-[#1D4840] text-white flex items-center justify-center mb-1">
+                    <div className="w-8 h-8 rounded-full bg-[#CE3627] text-white flex items-center justify-center mb-1">
                       <CheckCircle2 className="w-4 h-4" />
                     </div>
                     <span className="font-semibold text-black">Order Placed</span>
@@ -103,7 +103,7 @@ export default function PublicTrackingPage() {
                     <div
                       className={`w-8 h-8 rounded-full flex items-center justify-center mb-1 ${
                         searchedOrder.status === 'shipped' || searchedOrder.status === 'delivered'
-                          ? 'bg-[#1D4840] text-white'
+                          ? 'bg-[#CE3627] text-white'
                           : 'bg-[#E2E2E2] text-gray-400'
                       }`}
                     >
@@ -149,7 +149,7 @@ export default function PublicTrackingPage() {
 
                 {/* Delivery Destination */}
                 <div className="flex items-start gap-2.5 text-xs text-[#71717A]">
-                  <MapPin className="w-4 h-4 text-[#1D4840] shrink-0 mt-0.5" />
+                  <MapPin className="w-4 h-4 text-[#CE3627] shrink-0 mt-0.5" />
                   <span>
                     Delivering to: <b className="text-black">{searchedOrder.shippingAddress}</b>
                   </span>

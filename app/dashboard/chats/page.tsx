@@ -199,7 +199,7 @@ export default function ChatsPage() {
                     className={cn(
                       'max-w-[85%] sm:max-w-md p-3.5 rounded-2xl text-xs sm:text-sm leading-relaxed shadow-xs',
                       isMe
-                        ? 'bg-[#DFF5D0] text-[#1D4840] rounded-br-none border border-[#97DF68]/30'
+                        ? 'bg-[#FEF1ED] text-[#4A1512] rounded-br-none border border-[#F7D7D1]'
                         : 'bg-white text-[#000000] rounded-bl-none border border-[#E2E2E2]'
                     )}
                   >
@@ -234,15 +234,15 @@ export default function ChatsPage() {
           </div>
 
           {/* AI Quick Reply Recommendation Bar */}
-          <div className="px-4 py-2 bg-[#F5FCF0] border-t border-[#97DF68]/40 flex items-center justify-between gap-3 text-xs">
-            <div className="flex items-center gap-2 text-[#1D4840] font-semibold">
-              <Sparkles className="w-4 h-4 text-[#97DF68]" />
+          <div className="px-4 py-2 bg-[#FEF1ED] border-t border-[#F7D7D1] flex items-center justify-between gap-3 text-xs">
+            <div className="flex items-center gap-2 text-[#CE3627] font-semibold">
+              <Sparkles className="w-4 h-4 text-[#CE3627]" />
               <span className="hidden sm:inline">Productive with AI:</span>
-              <span className="text-[#1D4840] font-normal">Context-aware draft reply</span>
+              <span className="text-[#4A1512] font-normal">Context-aware draft reply</span>
             </div>
 
             <Button
-              variant="mint"
+              variant="primary"
               size="sm"
               disabled={isGeneratingAi}
               onClick={handleAiQuickReply}
@@ -270,13 +270,13 @@ export default function ChatsPage() {
               placeholder="Type your message..."
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
-              className="flex-1 px-4 py-2.5 bg-[#F6F6F6] rounded-full text-xs sm:text-sm border border-[#E2E2E2] focus:outline-none focus:border-[#1D4840]"
+              className="flex-1 px-4 py-2.5 bg-[#F6F6F6] rounded-full text-xs sm:text-sm border border-[#E2E2E2] focus:outline-none focus:border-[#CE3627]"
             />
 
             <button
               type="submit"
               disabled={!inputMessage.trim()}
-              className="w-10 h-10 rounded-full bg-[#1D4840] text-white flex items-center justify-center hover:bg-[#163731] disabled:opacity-40 transition-all shrink-0"
+              className="w-10 h-10 rounded-full bg-[#CE3627] text-white flex items-center justify-center hover:bg-[#B72E20] disabled:opacity-40 transition-all shrink-0"
             >
               <Send className="w-4 h-4" />
             </button>

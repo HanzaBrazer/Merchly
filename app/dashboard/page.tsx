@@ -63,7 +63,7 @@ export default function DashboardPage() {
             </Button>
 
             <Button
-              variant="mint"
+              variant="primary"
               size="md"
               className="text-xs sm:text-sm font-semibold"
               onClick={() => setIsNewOrderModalOpen(true)}
@@ -82,7 +82,7 @@ export default function DashboardPage() {
             lastWeekValue="2,340"
             trendPercentage={7}
             isPositive={true}
-            icon={<ShoppingBag className="w-5 h-5 text-[#1D4840]" />}
+            icon={<ShoppingBag className="w-5 h-5 text-[#CE3627]" />}
             infoTooltip="Total volume of sales transactions"
           />
 
@@ -92,7 +92,7 @@ export default function DashboardPage() {
             lastWeekValue="1,200"
             trendPercentage={3}
             isPositive={true}
-            icon={<Users className="w-5 h-5 text-[#1D4840]" />}
+            icon={<Users className="w-5 h-5 text-[#CE3627]" />}
             infoTooltip="Active customer base count"
           />
 
@@ -102,7 +102,7 @@ export default function DashboardPage() {
             lastWeekValue="6,118"
             trendPercentage={-5}
             isPositive={false}
-            icon={<DollarSign className="w-5 h-5 text-[#1D4840]" />}
+            icon={<DollarSign className="w-5 h-5 text-[#CE3627]" />}
             infoTooltip="Net revenue across all sales channels"
           />
 
@@ -112,7 +112,7 @@ export default function DashboardPage() {
             lastWeekValue="903"
             trendPercentage={-8}
             isPositive={false}
-            icon={<Package className="w-5 h-5 text-[#1D4840]" />}
+            icon={<Package className="w-5 h-5 text-[#CE3627]" />}
             infoTooltip="Active inventory items count"
           />
         </div>
@@ -153,7 +153,7 @@ export default function DashboardPage() {
               </div>
 
               <Link href="/dashboard/orders">
-                <Button variant="ghost" size="sm" className="text-xs font-semibold text-[#1D4840]">
+                <Button variant="ghost" size="sm" className="text-xs font-semibold text-[#CE3627]">
                   <span>View All</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Button>
@@ -240,7 +240,7 @@ export default function DashboardPage() {
                     <span className="font-semibold text-sm text-[#000000]">
                       {firstItem?.productName || 'Order Items'}
                     </span>
-                    <span className="font-bold text-base text-[#1D4840]">${ord.total}</span>
+                    <span className="font-bold text-base text-[#CE3627]">${ord.total}</span>
                   </div>
 
                   <div className="flex items-center justify-between text-xs text-[#71717A] pt-2 border-t border-[#E2E2E2]/60">

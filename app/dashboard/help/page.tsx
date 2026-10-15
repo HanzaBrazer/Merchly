@@ -41,42 +41,42 @@ export default function HelpCenterPage() {
         {/* 3 Quick Resource Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="bg-white p-5 rounded-3xl border border-[#E2E2E2] shadow-sm">
-            <div className="w-10 h-10 rounded-2xl bg-[#E8EDEC] text-[#1D4840] flex items-center justify-center mb-3">
+            <div className="w-10 h-10 rounded-2xl bg-[#FEF1ED] border border-[#F7D7D1] text-[#CE3627] flex items-center justify-center mb-3">
               <BookOpen className="w-5 h-5" />
             </div>
             <h3 className="font-bold text-sm text-[#000000]">Product Guide</h3>
             <p className="text-xs text-[#71717A] mt-1 mb-4 leading-relaxed">
               Step-by-step documentation on inventory management and order fulfillment.
             </p>
-            <Link href="/dashboard" className="text-xs font-bold text-[#1D4840] flex items-center gap-1 hover:underline">
+            <Link href="/dashboard" className="text-xs font-bold text-[#CE3627] flex items-center gap-1 hover:underline">
               <span>View Guide</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
 
           <div className="bg-white p-5 rounded-3xl border border-[#E2E2E2] shadow-sm">
-            <div className="w-10 h-10 rounded-2xl bg-[#F5FCF0] text-[#1D4840] flex items-center justify-center mb-3">
-              <ShieldCheck className="w-5 h-5 text-[#97DF68]" />
+            <div className="w-10 h-10 rounded-2xl bg-[#FEF1ED] border border-[#F7D7D1] text-[#CE3627] flex items-center justify-center mb-3">
+              <ShieldCheck className="w-5 h-5 text-[#CE3627]" />
             </div>
             <h3 className="font-bold text-sm text-[#000000]">API &amp; Webhooks</h3>
             <p className="text-xs text-[#71717A] mt-1 mb-4 leading-relaxed">
               Explore webhook endpoints, signature verification, and Stripe idempotency.
             </p>
-            <Link href="/dashboard/settings" className="text-xs font-bold text-[#1D4840] flex items-center gap-1 hover:underline">
+            <Link href="/dashboard/settings" className="text-xs font-bold text-[#CE3627] flex items-center gap-1 hover:underline">
               <span>Inspect Webhooks</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
 
           <div className="bg-white p-5 rounded-3xl border border-[#E2E2E2] shadow-sm">
-            <div className="w-10 h-10 rounded-2xl bg-[#E8EDEC] text-[#1D4840] flex items-center justify-center mb-3">
+            <div className="w-10 h-10 rounded-2xl bg-[#FEF1ED] border border-[#F7D7D1] text-[#CE3627] flex items-center justify-center mb-3">
               <MessageSquare className="w-5 h-5" />
             </div>
             <h3 className="font-bold text-sm text-[#000000]">Support Desk</h3>
             <p className="text-xs text-[#71717A] mt-1 mb-4 leading-relaxed">
               Have a question or encounter a blocker? Talk with our support engineering team.
             </p>
-            <Link href="/dashboard/chats" className="text-xs font-bold text-[#1D4840] flex items-center gap-1 hover:underline">
+            <Link href="/dashboard/chats" className="text-xs font-bold text-[#CE3627] flex items-center gap-1 hover:underline">
               <span>Open Support Chat</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>

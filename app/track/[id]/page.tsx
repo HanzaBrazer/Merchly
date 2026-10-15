@@ -39,7 +39,7 @@ function TrackingContent() {
           {/* Tracking Steps */}
           <div className="grid grid-cols-3 gap-2 text-center text-xs">
             <div className="flex flex-col items-center">
-              <div className="w-8 h-8 rounded-full bg-[#1D4840] text-white flex items-center justify-center mb-1">
+              <div className="w-8 h-8 rounded-full bg-[#CE3627] text-white flex items-center justify-center mb-1">
                 <CheckCircle2 className="w-4 h-4" />
               </div>
               <span className="font-semibold text-black">Order Placed</span>
@@ -50,7 +50,7 @@ function TrackingContent() {
               <div
                 className={`w-8 h-8 rounded-full flex items-center justify-center mb-1 ${
                   order.status === 'shipped' || order.status === 'delivered'
-                    ? 'bg-[#1D4840] text-white'
+                    ? 'bg-[#CE3627] text-white'
                     : 'bg-[#E2E2E2] text-gray-400'
                 }`}
               >
@@ -94,7 +94,7 @@ function TrackingContent() {
           </div>
 
           <div className="flex items-start gap-2.5 text-xs text-[#71717A]">
-            <MapPin className="w-4 h-4 text-[#1D4840] shrink-0 mt-0.5" />
+            <MapPin className="w-4 h-4 text-[#CE3627] shrink-0 mt-0.5" />
             <span>
               Shipping Address: <b className="text-black">{order.shippingAddress}</b>
             </span>

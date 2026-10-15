@@ -84,7 +84,7 @@ export function ProductsPage() {
             </Button>
 
             <Button
-              variant="mint"
+              variant="primary"
               size="md"
               className="text-xs sm:text-sm font-semibold"
               onClick={() => setIsNewProductModalOpen(true)}
@@ -100,7 +100,7 @@ export function ProductsPage() {
           {/* Card 1: Total Product */}
           <div className="bg-white rounded-3xl p-5 sm:p-6 border border-[#E2E2E2] shadow-sm flex flex-col justify-between">
             <div className="flex items-center gap-2.5 text-[#71717A] text-sm font-medium mb-3">
-              <div className="w-10 h-10 rounded-2xl bg-[#F6F6F6] flex items-center justify-center text-[#1D4840]">
+              <div className="w-10 h-10 rounded-2xl bg-[#F6F6F6] flex items-center justify-center text-[#CE3627]">
                 <Package className="w-5 h-5" />
               </div>
               <span>Total Product</span>
@@ -122,7 +122,7 @@ export function ProductsPage() {
                 <path
                   d="M0 30 Q 50 35, 100 20 T 200 10"
                   fill="none"
-                  stroke="#97DF68"
+                  stroke="#CE3627"
                   strokeWidth="2.5"
                 />
               </svg>
@@ -132,7 +132,7 @@ export function ProductsPage() {
           {/* Card 2: Product Stock Breakdown */}
           <div className="bg-white rounded-3xl p-5 sm:p-6 border border-[#E2E2E2] shadow-sm flex flex-col justify-between">
             <div className="flex items-center gap-2.5 text-[#71717A] text-sm font-medium mb-3">
-              <div className="w-10 h-10 rounded-2xl bg-[#F6F6F6] flex items-center justify-center text-[#1D4840]">
+              <div className="w-10 h-10 rounded-2xl bg-[#F6F6F6] flex items-center justify-center text-[#CE3627]">
                 <Package className="w-5 h-5" />
               </div>
               <span>Product Stock</span>
@@ -141,12 +141,12 @@ export function ProductsPage() {
             {/* Segmented stock progress bar */}
             <div className="w-full h-3 rounded-full bg-[#F6F6F6] flex overflow-hidden my-2">
               <div
-                className="h-full bg-[#1D4840] rounded-l-full"
+                className="h-full bg-[#CE3627] rounded-l-full"
                 style={{ width: '15%' }}
                 title="Out of stock"
               />
               <div
-                className="h-full bg-[#97DF68]"
+                className="h-full bg-[#FF7A6B]"
                 style={{ width: '35%' }}
                 title="Low stock"
               />
@@ -161,7 +161,7 @@ export function ProductsPage() {
             <div className="space-y-1.5 mt-2 text-xs font-medium">
               <div className="flex items-center justify-between text-[#000000]">
                 <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#1D4840]" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#CE3627]" />
                   <span>Out of stock</span>
                 </div>
                 <span className="font-bold">{outOfStockCount > 0 ? outOfStockCount : 12}</span>
@@ -169,7 +169,7 @@ export function ProductsPage() {
 
               <div className="flex items-center justify-between text-[#000000]">
                 <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#97DF68]" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#FF7A6B]" />
                   <span>Low stock</span>
                 </div>
                 <span className="font-bold">{lowStockCount > 0 ? lowStockCount : 29}</span>
@@ -224,7 +224,7 @@ export function ProductsPage() {
                   placeholder="Search products..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-9 pr-4 py-1.5 rounded-full border border-[#E2E2E2] text-xs sm:text-sm focus:outline-none focus:border-[#1D4840] bg-[#F6F6F6]"
+                  className="w-full pl-9 pr-4 py-1.5 rounded-full border border-[#E2E2E2] text-xs sm:text-sm focus:outline-none focus:border-[#CE3627] focus:ring-2 focus:ring-[#CE3627]/20 bg-[#F6F6F6]"
                 />
               </div>
 
@@ -316,7 +316,7 @@ export function ProductsPage() {
                       <div className="flex items-center justify-end gap-1.5">
                         <button
                           onClick={() => adjustProductStock(prod.id, 10)}
-                          className="p-1.5 rounded-lg text-[#71717A] hover:text-[#1D4840] hover:bg-black/5"
+                          className="p-1.5 rounded-lg text-[#71717A] hover:text-[#CE3627] hover:bg-black/5"
                           title="Restock +10"
                         >
                           <Edit2 className="w-4 h-4" />
@@ -364,7 +364,7 @@ export function ProductsPage() {
                       </Badge>
                     </div>
                     <p className="text-xs text-[#71717A] mt-0.5">{prod.category} • {prod.sku}</p>
-                    <p className="text-sm font-bold text-[#1D4840] mt-1">${prod.price}</p>
+                    <p className="text-sm font-bold text-[#CE3627] mt-1">${prod.price}</p>
                   </div>
                 </div>
 

@@ -42,11 +42,11 @@ export function MobileNav({ onOpenDrawer }: MobileNavProps) {
             href={item.href}
             className={cn(
               'flex flex-col items-center justify-center min-w-[56px] min-h-[44px] py-1 px-2 rounded-2xl transition-all relative',
-              isActive ? 'text-[#1D4840] font-semibold' : 'text-[#71717A] hover:text-[#000000]'
+              isActive ? 'text-[#CE3627] font-semibold' : 'text-[#71717A] hover:text-[#000000]'
             )}
           >
             <div className="relative">
-              <Icon className={cn('w-5 h-5', isActive && 'text-[#1D4840] stroke-[2.5]')} />
+              <Icon className={cn('w-5 h-5', isActive && 'text-[#CE3627] stroke-[2.5]')} />
               {item.badge !== undefined && (
                 <span className="absolute -top-1.5 -right-2 min-w-[16px] h-4 px-1 rounded-full bg-[#FF0013] text-white text-[10px] font-bold flex items-center justify-center">
                   {item.badge}

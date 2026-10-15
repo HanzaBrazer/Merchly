@@ -5,12 +5,12 @@ export function Logo({ className = 'w-8 h-8', showText = true }: { className?: s
     <div className="flex items-center gap-2.5 select-none">
       <div className={`relative flex items-center justify-center shrink-0 ${className}`}>
         <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-          <circle cx="20" cy="20" r="18" fill="#1D4840" />
+          <circle cx="20" cy="20" r="18" fill="#CE3627" />
           <path
             d="M20 7C20 14.1797 14.1797 20 7 20C14.1797 20 20 25.8203 20 33C20 25.8203 25.8203 20 33 20C25.8203 20 20 14.1797 20 7Z"
-            fill="#97DF68"
+            fill="#FFFFFF"
           />
-          <circle cx="20" cy="20" r="3" fill="#1D4840" />
+          <circle cx="20" cy="20" r="3" fill="#CE3627" />
         </svg>
       </div>
       {showText && (

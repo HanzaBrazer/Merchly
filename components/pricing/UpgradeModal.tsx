@@ -138,13 +138,13 @@ export function UpgradeModal() {
                 className={cn(
                   'rounded-3xl p-5 border-2 text-left cursor-pointer transition-all relative flex flex-col justify-between',
                   isSelected
-                    ? 'border-[#97DF68] bg-[#F5FCF0]/50 shadow-md ring-2 ring-[#97DF68]/20'
-                    : 'border-[#E2E2E2] bg-white hover:border-[#1D4840]/30',
-                  isCurrent && 'ring-1 ring-[#1D4840]'
+                    ? 'border-[#CE3627] bg-[#FEF1ED]/50 shadow-md ring-2 ring-[#CE3627]/20'
+                    : 'border-[#E2E2E2] bg-white hover:border-[#CE3627]/30',
+                  isCurrent && 'ring-1 ring-[#CE3627]'
                 )}
               >
                 {p.popular && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#1D4840] text-[#97DF68] text-[10px] font-bold px-3 py-0.5 rounded-full uppercase tracking-wider shadow-xs">
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#CE3627] text-white text-[10px] font-bold px-3 py-0.5 rounded-full uppercase tracking-wider shadow-xs">
                     Most Popular
                   </span>
                 )}
@@ -153,7 +153,7 @@ export function UpgradeModal() {
                   <div className="flex items-center justify-between mb-1">
                     <h4 className="font-bold text-sm text-[#000000]">{p.name}</h4>
                     {isCurrent && (
-                      <span className="text-[10px] font-semibold bg-[#E8EDEC] text-[#1D4840] px-2 py-0.5 rounded-full">
+                      <span className="text-[10px] font-semibold bg-[#FEF1ED] text-[#CE3627] border border-[#F7D7D1] px-2 py-0.5 rounded-full">
                         Current
                       </span>
                     )}
@@ -182,7 +182,7 @@ export function UpgradeModal() {
                 </div>
 
                 <Button
-                  variant={isSelected ? 'mint' : 'outline'}
+                  variant={isSelected ? 'primary' : 'outline'}
                   size="sm"
                   className="w-full text-xs font-bold mt-2"
                   onClick={(e) => {
@@ -200,7 +200,7 @@ export function UpgradeModal() {
         {/* Stripe Sandbox Checkout Simulation Box */}
         <div className="bg-[#F8F9FA] rounded-2xl p-4 border border-[#E2E2E2] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-[#1D4840] text-[#97DF68] flex items-center justify-center shrink-0">
+            <div className="w-9 h-9 rounded-xl bg-[#CE3627] text-white flex items-center justify-center shrink-0">
               <CreditCard className="w-5 h-5" />
             </div>
             <div>
@@ -218,7 +218,7 @@ export function UpgradeModal() {
 
           <div className="flex items-center gap-2 w-full sm:w-auto">
             <Button
-              variant="mint"
+              variant="primary"
               size="md"
               disabled={isProcessing || selectedPlan === workspace.plan}
               onClick={handleCheckout}

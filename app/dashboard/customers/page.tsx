@@ -68,7 +68,7 @@ export default function CustomersPage() {
           </div>
 
           <Button
-            variant="mint"
+            variant="primary"
             size="md"
             className="text-xs sm:text-sm font-semibold"
             onClick={() => setIsAddCustomerOpen(true)}
@@ -82,7 +82,7 @@ export default function CustomersPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div className="bg-white rounded-3xl p-5 sm:p-6 border border-[#E2E2E2] shadow-sm flex flex-col justify-between">
             <div className="flex items-center gap-2.5 text-[#71717A] text-sm font-medium mb-3">
-              <div className="w-10 h-10 rounded-2xl bg-[#F6F6F6] flex items-center justify-center text-[#1D4840]">
+              <div className="w-10 h-10 rounded-2xl bg-[#F6F6F6] flex items-center justify-center text-[#CE3627]">
                 <Users className="w-5 h-5" />
               </div>
               <span>Total Customers</span>
@@ -97,8 +97,8 @@ export default function CustomersPage() {
 
           <div className="bg-white rounded-3xl p-5 sm:p-6 border border-[#E2E2E2] shadow-sm flex flex-col justify-between">
             <div className="flex items-center gap-2.5 text-[#71717A] text-sm font-medium mb-3">
-              <div className="w-10 h-10 rounded-2xl bg-[#F5FCF0] flex items-center justify-center text-[#1D4840]">
-                <Crown className="w-5 h-5 text-[#97DF68]" />
+              <div className="w-10 h-10 rounded-2xl bg-[#FEF1ED] flex items-center justify-center text-[#CE3627]">
+                <Crown className="w-5 h-5 text-[#CE3627]" />
               </div>
               <span>VIP Tier Buyers</span>
             </div>
@@ -110,7 +110,7 @@ export default function CustomersPage() {
 
           <div className="bg-white rounded-3xl p-5 sm:p-6 border border-[#E2E2E2] shadow-sm flex flex-col justify-between">
             <div className="flex items-center gap-2.5 text-[#71717A] text-sm font-medium mb-3">
-              <div className="w-10 h-10 rounded-2xl bg-[#F6F6F6] flex items-center justify-center text-[#1D4840]">
+              <div className="w-10 h-10 rounded-2xl bg-[#F6F6F6] flex items-center justify-center text-[#CE3627]">
                 <DollarSign className="w-5 h-5" />
               </div>
               <span>Total Lifetime Spend</span>
@@ -125,7 +125,7 @@ export default function CustomersPage() {
 
           <div className="bg-white rounded-3xl p-5 sm:p-6 border border-[#E2E2E2] shadow-sm flex flex-col justify-between">
             <div className="flex items-center gap-2.5 text-[#71717A] text-sm font-medium mb-3">
-              <div className="w-10 h-10 rounded-2xl bg-[#F6F6F6] flex items-center justify-center text-[#1D4840]">
+              <div className="w-10 h-10 rounded-2xl bg-[#F6F6F6] flex items-center justify-center text-[#CE3627]">
                 <ShoppingBag className="w-5 h-5" />
               </div>
               <span>Average Orders / Buyer</span>
@@ -149,7 +149,7 @@ export default function CustomersPage() {
               placeholder="Search by customer name or email..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 rounded-full border border-[#E2E2E2] text-xs sm:text-sm focus:outline-none focus:border-[#1D4840] bg-[#F6F6F6]"
+              className="w-full pl-9 pr-4 py-2 rounded-full border border-[#E2E2E2] text-xs sm:text-sm focus:outline-none focus:border-[#CE3627] bg-[#F6F6F6]"
             />
           </div>
 
@@ -196,7 +196,7 @@ export default function CustomersPage() {
                     <td className="py-3.5 px-3 font-semibold text-[#000000]">
                       {cust.totalOrders} orders
                     </td>
-                    <td className="py-3.5 px-3 font-bold text-[#1D4840]">
+                    <td className="py-3.5 px-3 font-bold text-[#CE3627]">
                       ${cust.totalSpent.toLocaleString()}
                     </td>
                     <td className="py-3.5 px-3 text-xs text-[#71717A]">{cust.lastOrderDate}</td>
@@ -239,7 +239,7 @@ export default function CustomersPage() {
 
                 <div className="flex items-center justify-between text-xs pt-2 border-t border-[#E2E2E2]/60">
                   <span className="text-[#71717A]">{cust.totalOrders} orders</span>
-                  <span className="font-bold text-sm text-[#1D4840]">
+                  <span className="font-bold text-sm text-[#CE3627]">
                     ${cust.totalSpent.toLocaleString()}
                   </span>
                 </div>
@@ -262,7 +262,7 @@ export default function CustomersPage() {
             <div className="p-4 rounded-2xl bg-[#F6F6F6] flex items-center justify-between">
               <div>
                 <p className="text-xs text-[#71717A]">Lifetime Spend</p>
-                <p className="text-2xl font-bold text-[#1D4840]">
+                <p className="text-2xl font-bold text-[#CE3627]">
                   ${selectedCustomer.totalSpent.toLocaleString()}
                 </p>
               </div>
@@ -273,11 +273,11 @@ export default function CustomersPage() {
 
             <div className="space-y-1.5 text-xs text-[#71717A]">
               <p className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-[#1D4840]" />
+                <Mail className="w-4 h-4 text-[#CE3627]" />
                 <span className="text-black font-medium">{selectedCustomer.email}</span>
               </p>
               <p className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-[#1D4840]" />
+                <Phone className="w-4 h-4 text-[#CE3627]" />
                 <span className="text-black font-medium">
                   {selectedCustomer.phone || '+1 (555) 000-0000'}
                 </span>
@@ -338,7 +338,7 @@ export default function CustomersPage() {
               placeholder="e.g. Sarah Connor"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#1D4840]"
+              className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#CE3627]"
               required
             />
           </div>
@@ -352,7 +352,7 @@ export default function CustomersPage() {
               placeholder="sarah@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#1D4840]"
+              className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#CE3627]"
               required
             />
           </div>
@@ -366,7 +366,7 @@ export default function CustomersPage() {
               placeholder="+1 (555) 000-0000"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#1D4840]"
+              className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#CE3627]"
             />
           </div>
 

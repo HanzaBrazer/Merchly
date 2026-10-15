@@ -49,7 +49,7 @@ export function TopBar({ onOpenMobileMenu }: TopBarProps) {
         {/* Desktop Global Search Bar (Figma replica) */}
         <button
           onClick={() => setIsSearchModalOpen(true)}
-          className="hidden sm:flex items-center justify-between w-72 lg:w-96 px-4 py-2 bg-white rounded-full border border-[#E2E2E2] text-sm text-[#71717A] hover:border-[#1D4840]/40 shadow-xs transition-colors"
+          className="hidden sm:flex items-center justify-between w-72 lg:w-96 px-4 py-2 bg-white rounded-full border border-[#E2E2E2] text-sm text-[#71717A] hover:border-[#CE3627]/40 shadow-xs transition-colors"
         >
           <div className="flex items-center gap-2.5">
             <Search className="w-4 h-4 text-[#A0A0A0]" />
@@ -65,7 +65,7 @@ export function TopBar({ onOpenMobileMenu }: TopBarProps) {
       <div className="flex items-center gap-2.5 sm:gap-4">
         {/* Workspace Pill */}
         <div className="hidden md:flex items-center gap-2 px-3 py-1.5 bg-white rounded-full border border-[#E2E2E2] text-xs font-medium text-[#000000]">
-          <Building2 className="w-3.5 h-3.5 text-[#1D4840]" />
+          <Building2 className="w-3.5 h-3.5 text-[#CE3627]" />
           <span>{workspace.name}</span>
           <Badge variant={workspace.plan === 'FREE' ? 'free' : 'pro'} size="sm">
             {workspace.plan}
@@ -99,8 +99,8 @@ export function TopBar({ onOpenMobileMenu }: TopBarProps) {
                 <span className="text-[11px] text-[#0E8F21] font-medium">3 unread</span>
               </div>
               <div className="py-2 space-y-2.5">
-                <div className="p-2 rounded-xl bg-[#F5FCF0] border border-[#97DF68]/30">
-                  <p className="font-semibold text-[#1D4840]">AI Stock Alert</p>
+                <div className="p-2 rounded-xl bg-[#FEF1ED] border border-[#F7D7D1]">
+                  <p className="font-semibold text-[#CE3627]">AI Stock Alert</p>
                   <p className="text-[#71717A] text-[11px] mt-0.5">
                     Bergen Sofa stock is at 3 pcs (Reorder point: 8).
                   </p>
@@ -122,7 +122,7 @@ export function TopBar({ onOpenMobileMenu }: TopBarProps) {
         <div className="relative">
           <button
             onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
-            className="flex items-center gap-2.5 pl-1.5 pr-3 py-1 bg-white rounded-full border border-[#E2E2E2] hover:border-[#1D4840]/30 transition-colors"
+            className="flex items-center gap-2.5 pl-1.5 pr-3 py-1 bg-white rounded-full border border-[#E2E2E2] hover:border-[#CE3627]/30 transition-colors"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -148,9 +148,9 @@ export function TopBar({ onOpenMobileMenu }: TopBarProps) {
                     setIsUpgradeModalOpen(true);
                     setIsProfileMenuOpen(false);
                   }}
-                  className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-left hover:bg-[#F5FCF0] text-[#1D4840] font-medium"
+                  className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-left hover:bg-[#FEF1ED] text-[#CE3627] font-medium"
                 >
-                  <Sparkles className="w-4 h-4 text-[#97DF68]" />
+                  <Sparkles className="w-4 h-4 text-[#CE3627]" />
                   <span>Subscription ({workspace.plan})</span>
                 </button>
 

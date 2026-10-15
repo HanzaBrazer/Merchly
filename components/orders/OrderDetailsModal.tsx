@@ -54,7 +54,7 @@ export function OrderDetailsModal() {
           </div>
 
           {selectedOrder.trackingNumber && (
-            <div className="flex items-center gap-2 text-xs text-[#1D4840] font-medium bg-[#E8EDEC] px-3 py-1.5 rounded-full">
+            <div className="flex items-center gap-2 text-xs text-[#CE3627] font-medium bg-[#FEF1ED] border border-[#F7D7D1] px-3 py-1.5 rounded-full">
               <Truck className="w-3.5 h-3.5" />
               <span>Tracking: {selectedOrder.trackingNumber}</span>
             </div>
@@ -65,7 +65,7 @@ export function OrderDetailsModal() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="p-4 rounded-2xl border border-[#E2E2E2] space-y-2">
             <div className="flex items-center gap-2 text-xs font-semibold text-[#71717A] uppercase tracking-wider">
-              <User className="w-4 h-4 text-[#1D4840]" />
+              <User className="w-4 h-4 text-[#CE3627]" />
               <span>Customer</span>
             </div>
             <p className="font-semibold text-[#000000]">{selectedOrder.customerName}</p>
@@ -77,7 +77,7 @@ export function OrderDetailsModal() {
 
           <div className="p-4 rounded-2xl border border-[#E2E2E2] space-y-2">
             <div className="flex items-center gap-2 text-xs font-semibold text-[#71717A] uppercase tracking-wider">
-              <MapPin className="w-4 h-4 text-[#1D4840]" />
+              <MapPin className="w-4 h-4 text-[#CE3627]" />
               <span>Shipping Address</span>
             </div>
             <p className="text-xs text-[#000000] leading-relaxed">
@@ -131,9 +131,9 @@ export function OrderDetailsModal() {
         </div>
 
         {/* Total Summary */}
-        <div className="p-4 rounded-2xl bg-[#E8EDEC] flex items-center justify-between">
-          <span className="font-semibold text-sm text-[#1D4840]">Total Amount</span>
-          <span className="text-2xl font-bold text-[#1D4840]">${selectedOrder.total}</span>
+        <div className="p-4 rounded-2xl bg-[#FEF1ED] border border-[#F7D7D1] flex items-center justify-between">
+          <span className="font-semibold text-sm text-[#CE3627]">Total Amount</span>
+          <span className="text-2xl font-bold text-[#CE3627]">${selectedOrder.total}</span>
         </div>
 
         {/* Action Buttons */}

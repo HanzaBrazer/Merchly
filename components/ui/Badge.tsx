@@ -38,14 +38,14 @@ export function Badge({ variant = 'in_stock', children, className, size = 'md' }
     delivered: 'bg-[#E7F4E9] text-[#0E8F21] border border-[#0E8F21]/20',
     cancelled: 'bg-[#FFE6E7] text-[#FF0013] border border-[#FF0013]/20',
     active: 'bg-[#E7F4E9] text-[#0E8F21] border border-[#0E8F21]/20',
-    vip: 'bg-[#F5FCF0] text-[#1D4840] border border-[#97DF68]',
+    vip: 'bg-[#FEF1ED] text-[#CE3627] border border-[#F7D7D1]',
     inactive: 'bg-[#F0F0F0] text-[#71717A] border border-[#D3D3D3]',
     published: 'bg-[#E7F4E9] text-[#0E8F21] border border-[#0E8F21]/20',
     draft: 'bg-[#F5F5F5] text-[#71717A] border border-[#E2E2E2]',
     hidden: 'bg-[#F0F0F0] text-[#71717A] border border-[#D3D3D3]',
-    pro: 'bg-[#97DF68] text-[#1D4840] font-semibold',
+    pro: 'bg-[#CE3627] text-white font-semibold',
     free: 'bg-[#F0F0F0] text-[#71717A]',
-    business: 'bg-[#1D4840] text-white',
+    business: 'bg-[#4A1512] text-white',
   };
 
   const sizeStyles = {

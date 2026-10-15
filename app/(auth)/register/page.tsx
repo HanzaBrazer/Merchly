@@ -56,7 +56,7 @@ export default function RegisterPage() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Brian Vance"
-                  className="w-full pl-10 pr-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#1D4840] text-sm"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#CE3627] text-sm"
                   required
                 />
               </div>
@@ -73,7 +73,7 @@ export default function RegisterPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="brian@email.com"
-                  className="w-full pl-10 pr-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#1D4840] text-sm"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#CE3627] text-sm"
                   required
                 />
               </div>
@@ -90,7 +90,7 @@ export default function RegisterPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full pl-10 pr-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#1D4840] text-sm"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#CE3627] text-sm"
                   required
                 />
               </div>
@@ -107,7 +107,7 @@ export default function RegisterPage() {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full pl-10 pr-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#1D4840] text-sm"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#CE3627] text-sm"
                   required
                 />
               </div>
@@ -122,7 +122,7 @@ export default function RegisterPage() {
           {/* Login Link */}
           <div className="text-center mt-6 pt-4 border-t border-[#E2E2E2]/60 text-xs text-[#71717A]">
             Already have an account?{' '}
-            <Link href="/login" className="font-bold text-[#1D4840] hover:underline">
+            <Link href="/login" className="font-bold text-[#CE3627] hover:underline">
               Sign In
             </Link>
           </div>

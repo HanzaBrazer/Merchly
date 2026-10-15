@@ -89,7 +89,7 @@ export default function SettingsPage() {
                 onClick={() => setActiveTab(tab.id as any)}
                 className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold transition-all ${
                   isActive
-                    ? 'bg-[#1D4840] text-white shadow-xs'
+                    ? 'bg-[#CE3627] text-white shadow-xs'
                     : 'text-[#71717A] hover:text-[#000000] hover:bg-black/5'
                 }`}
               >
@@ -113,7 +113,7 @@ export default function SettingsPage() {
                   type="text"
                   value={storeName}
                   onChange={(e) => setStoreName(e.target.value)}
-                  className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#1D4840]"
+                  className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#CE3627] focus:ring-2 focus:ring-[#CE3627]/20"
                 />
               </div>
 
@@ -125,7 +125,7 @@ export default function SettingsPage() {
                   <select
                     value={currency}
                     onChange={(e) => setCurrency(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#1D4840] bg-white"
+                    className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#CE3627] focus:ring-2 focus:ring-[#CE3627]/20 bg-white"
                   >
                     <option value="USD">USD ($)</option>
                     <option value="IDR">IDR (Rp)</option>
@@ -142,7 +142,7 @@ export default function SettingsPage() {
                     type="number"
                     value={salesTarget}
                     onChange={(e) => setSalesTarget(Number(e.target.value))}
-                    className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#1D4840]"
+                    className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#CE3627] focus:ring-2 focus:ring-[#CE3627]/20"
                   />
                 </div>
               </div>
@@ -181,7 +181,7 @@ export default function SettingsPage() {
                 </div>
 
                 <Button
-                  variant="mint"
+                  variant="primary"
                   size="md"
                   className="text-xs sm:text-sm font-semibold"
                   onClick={() => setIsInviteOpen(true)}
@@ -220,7 +220,7 @@ export default function SettingsPage() {
                           </div>
                         </td>
                         <td className="py-3.5 px-3">
-                          <span className="font-mono text-xs uppercase px-2 py-0.5 rounded-full bg-[#E8EDEC] text-[#1D4840] font-bold">
+                          <span className="font-mono text-xs uppercase px-2 py-0.5 rounded-full bg-[#FEF1ED] text-[#CE3627] border border-[#F7D7D1] font-bold">
                             {member.role}
                           </span>
                         </td>
@@ -243,19 +243,19 @@ export default function SettingsPage() {
               </p>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                 <div className="p-3 rounded-2xl bg-white border border-[#E2E2E2]">
-                  <p className="font-bold text-[#1D4840]">Owner</p>
+                  <p className="font-bold text-[#CE3627]">Owner</p>
                   <p className="text-[11px] text-[#71717A] mt-1">Full control, billing, team admin, delete workspace.</p>
                 </div>
                 <div className="p-3 rounded-2xl bg-white border border-[#E2E2E2]">
-                  <p className="font-bold text-[#1D4840]">Admin</p>
+                  <p className="font-bold text-[#CE3627]">Admin</p>
                   <p className="text-[11px] text-[#71717A] mt-1">Manage catalog, orders, and invite team members.</p>
                 </div>
                 <div className="p-3 rounded-2xl bg-white border border-[#E2E2E2]">
-                  <p className="font-bold text-[#1D4840]">Staff</p>
+                  <p className="font-bold text-[#CE3627]">Staff</p>
                   <p className="text-[11px] text-[#71717A] mt-1">Order processing, fulfillment, and customer chat.</p>
                 </div>
                 <div className="p-3 rounded-2xl bg-white border border-[#E2E2E2]">
-                  <p className="font-bold text-[#1D4840]">Viewer</p>
+                  <p className="font-bold text-[#CE3627]">Viewer</p>
                   <p className="text-[11px] text-[#71717A] mt-1">Read-only view of dashboard and products.</p>
                 </div>
               </div>
@@ -299,7 +299,7 @@ export default function SettingsPage() {
 
               <div className="pt-4 border-t border-[#E2E2E2] flex flex-wrap items-center gap-3">
                 <Button
-                  variant="mint"
+                  variant="primary"
                   size="md"
                   onClick={() => setIsUpgradeModalOpen(true)}
                   className="font-bold"
@@ -390,7 +390,7 @@ export default function SettingsPage() {
               placeholder="e.g. John Doe"
               value={inviteName}
               onChange={(e) => setInviteName(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#1D4840]"
+              className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#CE3627] focus:ring-2 focus:ring-[#CE3627]/20"
               required
             />
           </div>
@@ -404,7 +404,7 @@ export default function SettingsPage() {
               placeholder="john@example.com"
               value={inviteEmail}
               onChange={(e) => setInviteEmail(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#1D4840]"
+              className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#CE3627] focus:ring-2 focus:ring-[#CE3627]/20"
               required
             />
           </div>
@@ -416,7 +416,7 @@ export default function SettingsPage() {
             <select
               value={inviteRole}
               onChange={(e) => setInviteRole(e.target.value as any)}
-              className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#1D4840] bg-white"
+              className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#CE3627] focus:ring-2 focus:ring-[#CE3627]/20 bg-white"
             >
               <option value="admin">Admin — Catalog, orders, team</option>
               <option value="staff">Staff — Order fulfillment &amp; chat</option>

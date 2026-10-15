@@ -22,11 +22,11 @@ export function MetricCard({
   isPositive = trendPercentage >= 0,
 }: MetricCardProps) {
   return (
-    <div className="bg-white rounded-3xl p-5 sm:p-6 border border-[#E2E2E2] shadow-sm flex flex-col justify-between hover:border-[#1D4840]/30 transition-colors">
+    <div className="bg-white rounded-3xl p-5 sm:p-6 border border-[#E2E2E2] shadow-sm flex flex-col justify-between hover:border-[#CE3627]/30 transition-colors">
       {/* Top Row: Icon + Title + Info */}
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2.5">
-          <div className="w-10 h-10 rounded-2xl bg-[#F6F6F6] flex items-center justify-center text-[#1D4840]">
+          <div className="w-10 h-10 rounded-2xl bg-[#F6F6F6] flex items-center justify-center text-[#CE3627]">
             {icon}
           </div>
           <span className="text-sm font-medium text-[#71717A]">{title}</span>

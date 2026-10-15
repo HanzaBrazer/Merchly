@@ -60,7 +60,7 @@ export default function OrdersPage() {
             </Link>
 
             <Button
-              variant="mint"
+              variant="primary"
               size="md"
               className="text-xs sm:text-sm font-semibold"
               onClick={() => setIsNewOrderModalOpen(true)}
@@ -76,7 +76,7 @@ export default function OrdersPage() {
           {/* Card 1: Total Orders */}
           <div className="bg-white rounded-3xl p-5 sm:p-6 border border-[#E2E2E2] shadow-sm flex flex-col justify-between">
             <div className="flex items-center gap-2.5 text-[#71717A] text-sm font-medium mb-3">
-              <div className="w-10 h-10 rounded-2xl bg-[#F6F6F6] flex items-center justify-center text-[#1D4840]">
+              <div className="w-10 h-10 rounded-2xl bg-[#F6F6F6] flex items-center justify-center text-[#CE3627]">
                 <Package className="w-5 h-5" />
               </div>
               <span>Total Orders</span>
@@ -93,7 +93,7 @@ export default function OrdersPage() {
           {/* Card 2: Order Volume Growth */}
           <div className="bg-white rounded-3xl p-5 sm:p-6 border border-[#E2E2E2] shadow-sm flex flex-col justify-between">
             <div className="flex items-center gap-2.5 text-[#71717A] text-sm font-medium mb-3">
-              <div className="w-10 h-10 rounded-2xl bg-[#F6F6F6] flex items-center justify-center text-[#1D4840]">
+              <div className="w-10 h-10 rounded-2xl bg-[#F6F6F6] flex items-center justify-center text-[#CE3627]">
                 <TrendingDown className="w-5 h-5" />
               </div>
               <span>Order Volume Growth</span>
@@ -111,7 +111,7 @@ export default function OrdersPage() {
           {/* Card 3: Average Delivery Time */}
           <div className="bg-white rounded-3xl p-5 sm:p-6 border border-[#E2E2E2] shadow-sm flex flex-col justify-between">
             <div className="flex items-center gap-2.5 text-[#71717A] text-sm font-medium mb-3">
-              <div className="w-10 h-10 rounded-2xl bg-[#F6F6F6] flex items-center justify-center text-[#1D4840]">
+              <div className="w-10 h-10 rounded-2xl bg-[#F6F6F6] flex items-center justify-center text-[#CE3627]">
                 <Clock className="w-5 h-5" />
               </div>
               <span>Average Delivery Time</span>
@@ -130,7 +130,7 @@ export default function OrdersPage() {
           {/* Card 4: Average Shipping Distance */}
           <div className="bg-white rounded-3xl p-5 sm:p-6 border border-[#E2E2E2] shadow-sm flex flex-col justify-between">
             <div className="flex items-center gap-2.5 text-[#71717A] text-sm font-medium mb-3">
-              <div className="w-10 h-10 rounded-2xl bg-[#F6F6F6] flex items-center justify-center text-[#1D4840]">
+              <div className="w-10 h-10 rounded-2xl bg-[#F6F6F6] flex items-center justify-center text-[#CE3627]">
                 <MapPin className="w-5 h-5" />
               </div>
               <span>Average Shipping Distance</span>
@@ -188,7 +188,7 @@ export default function OrdersPage() {
               title="Pending (42%)"
             />
             <div
-              className="h-full bg-[#97DF68] transition-all"
+              className="h-full bg-[#0E8F21] transition-all"
               style={{ width: '54%' }}
               title="Shipped (54%)"
             />
@@ -206,7 +206,7 @@ export default function OrdersPage() {
               <span>Pending</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#97DF68]" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[#0E8F21]" />
               <span>Shipped</span>
             </div>
             <div className="flex items-center gap-2">
@@ -227,7 +227,7 @@ export default function OrdersPage() {
                 placeholder="Search by order ID, customer or product..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-9 pr-4 py-2 rounded-full border border-[#E2E2E2] text-xs sm:text-sm focus:outline-none focus:border-[#1D4840] bg-[#F6F6F6]"
+                className="w-full pl-9 pr-4 py-2 rounded-full border border-[#E2E2E2] text-xs sm:text-sm focus:outline-none focus:border-[#CE3627] focus:ring-2 focus:ring-[#CE3627]/20 bg-[#F6F6F6]"
               />
             </div>
 
@@ -239,7 +239,7 @@ export default function OrdersPage() {
                   onClick={() => setStatusFilter(st)}
                   className={`px-3 py-1.5 rounded-full text-xs font-semibold capitalize transition-all ${
                     statusFilter === st
-                      ? 'bg-[#1D4840] text-white shadow-xs'
+                      ? 'bg-[#CE3627] text-white shadow-xs'
                       : 'bg-[#F6F6F6] text-[#71717A] hover:text-[#000000]'
                   }`}
                 >
@@ -305,7 +305,7 @@ export default function OrdersPage() {
                             {firstItem?.productName || 'Custom'}
                           </span>
                           {ord.items.length > 1 && (
-                            <span className="text-[11px] font-semibold bg-[#E8EDEC] text-[#1D4840] px-1.5 py-0.5 rounded-md">
+                            <span className="text-[11px] font-semibold bg-[#FEF1ED] text-[#CE3627] border border-[#F7D7D1] px-1.5 py-0.5 rounded-md">
                               +{ord.items.length - 1}
                             </span>
                           )}
@@ -354,7 +354,7 @@ export default function OrdersPage() {
 
                   <div className="flex items-center justify-between">
                     <span className="font-mono text-xs text-[#71717A]">{ord.orderNumber}</span>
-                    <span className="font-bold text-base text-[#1D4840]">${ord.total}</span>
+                    <span className="font-bold text-base text-[#CE3627]">${ord.total}</span>
                   </div>
 
                   <div className="flex items-center justify-between text-xs text-[#71717A] pt-2 border-t border-[#E2E2E2]/60">

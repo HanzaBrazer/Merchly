@@ -37,9 +37,9 @@ const monthlyTrend = [
 ];
 
 const categoryShare = [
-  { name: 'Chairs', value: 35, color: '#1D4840' },
-  { name: 'Sofas', value: 28, color: '#97DF68' },
-  { name: 'Tables', value: 22, color: '#E8EDEC' },
+  { name: 'Chairs', value: 35, color: '#CE3627' },
+  { name: 'Sofas', value: 28, color: '#FF7A6B' },
+  { name: 'Tables', value: 22, color: '#F7D7D1' },
   { name: 'Beds', value: 15, color: '#D3D3D3' },
 ];
 
@@ -82,8 +82,8 @@ export default function AnalyticsPage() {
         <div className="relative">
           {/* Paywall Overlay */}
           {!isUnlocked && (
-            <div className="absolute inset-0 z-20 backdrop-blur-md bg-white/70 rounded-3xl flex flex-col items-center justify-center p-6 text-center border-2 border-dashed border-[#97DF68]">
-              <div className="w-16 h-16 rounded-3xl bg-[#1D4840] text-[#97DF68] flex items-center justify-center mb-4 shadow-lg">
+            <div className="absolute inset-0 z-20 backdrop-blur-md bg-white/70 rounded-3xl flex flex-col items-center justify-center p-6 text-center border-2 border-dashed border-[#CE3627]">
+              <div className="w-16 h-16 rounded-3xl bg-[#CE3627] text-white flex items-center justify-center mb-4 shadow-lg">
                 <Lock className="w-8 h-8" />
               </div>
 
@@ -96,7 +96,7 @@ export default function AnalyticsPage() {
               </p>
 
               <Button
-                variant="mint"
+                variant="primary"
                 size="lg"
                 onClick={() => setIsUpgradeModalOpen(true)}
                 className="text-sm font-bold shadow-md"
@@ -155,11 +155,11 @@ export default function AnalyticsPage() {
                 </div>
                 <div className="flex items-center gap-4 text-xs font-medium text-[#71717A]">
                   <div className="flex items-center gap-1.5">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#1D4840]" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#CE3627]" />
                     <span>Gross Revenue</span>
                   </div>
                   <div className="flex items-center gap-1.5">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#97DF68]" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#FF7A6B]" />
                     <span>Net Profit</span>
                   </div>
                 </div>
@@ -170,12 +170,12 @@ export default function AnalyticsPage() {
                   <AreaChart data={monthlyTrend}>
                     <defs>
                       <linearGradient id="colorRev" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#1D4840" stopOpacity={0.2} />
-                        <stop offset="95%" stopColor="#1D4840" stopOpacity={0} />
+                        <stop offset="5%" stopColor="#CE3627" stopOpacity={0.25} />
+                        <stop offset="95%" stopColor="#CE3627" stopOpacity={0} />
                       </linearGradient>
                       <linearGradient id="colorProf" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#97DF68" stopOpacity={0.4} />
-                        <stop offset="95%" stopColor="#97DF68" stopOpacity={0} />
+                        <stop offset="5%" stopColor="#FF7A6B" stopOpacity={0.4} />
+                        <stop offset="95%" stopColor="#FF7A6B" stopOpacity={0} />
                       </linearGradient>
                     </defs>
                     <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{ fontSize: 12 }} />
@@ -189,7 +189,7 @@ export default function AnalyticsPage() {
                     <Area
                       type="monotone"
                       dataKey="revenue"
-                      stroke="#1D4840"
+                      stroke="#CE3627"
                       strokeWidth={3}
                       fillOpacity={1}
                       fill="url(#colorRev)"
@@ -197,7 +197,7 @@ export default function AnalyticsPage() {
                     <Area
                       type="monotone"
                       dataKey="profit"
-                      stroke="#97DF68"
+                      stroke="#FF7A6B"
                       strokeWidth={3}
                       fillOpacity={1}
                       fill="url(#colorProf)"
@@ -256,9 +256,9 @@ export default function AnalyticsPage() {
                   <p className="text-xs text-[#71717A] mb-6">
                     Measures average dispatch time and carrier on-time rate
                   </p>
-                  <div className="p-4 rounded-2xl bg-[#F5FCF0] border border-[#97DF68]/40 mb-4">
+                  <div className="p-4 rounded-2xl bg-[#FEF1ED] border border-[#F7D7D1] mb-4">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-xs font-bold text-[#1D4840]">Dispatch Speed</span>
+                      <span className="text-xs font-bold text-[#CE3627]">Dispatch Speed</span>
                       <span className="text-xs font-bold text-[#0E8F21]">98.2% (Excellent)</span>
                     </div>
                     <div className="w-full h-2 rounded-full bg-[#E2E2E2]">
@@ -269,10 +269,10 @@ export default function AnalyticsPage() {
                   <div className="p-4 rounded-2xl bg-[#F6F6F6] border border-[#E2E2E2]">
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-xs font-bold text-[#000000]">On-Time Delivery</span>
-                      <span className="text-xs font-bold text-[#1D4840]">94.5%</span>
+                      <span className="text-xs font-bold text-[#CE3627]">94.5%</span>
                     </div>
                     <div className="w-full h-2 rounded-full bg-[#E2E2E2]">
-                      <div className="h-full rounded-full bg-[#1D4840] w-[94%]" />
+                      <div className="h-full rounded-full bg-[#CE3627] w-[94%]" />
                     </div>
                   </div>
                 </div>

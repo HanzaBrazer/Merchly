@@ -110,7 +110,7 @@ export function NewOrderModal() {
             {customers.length > 0 && (
               <select
                 onChange={handleSelectExistingCustomer}
-                className="text-xs text-[#1D4840] font-medium bg-transparent border-none focus:outline-none cursor-pointer"
+                className="text-xs text-[#CE3627] font-medium bg-transparent border-none focus:outline-none cursor-pointer"
                 defaultValue=""
               >
                 <option value="" disabled>
@@ -132,7 +132,7 @@ export function NewOrderModal() {
                 placeholder="Full Name (e.g. Alex Johnson)"
                 value={customerName}
                 onChange={(e) => setCustomerName(e.target.value)}
-                className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#1D4840] text-sm"
+                className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#CE3627] text-sm"
                 required
               />
             </div>
@@ -142,7 +142,7 @@ export function NewOrderModal() {
                 placeholder="Email Address"
                 value={customerEmail}
                 onChange={(e) => setCustomerEmail(e.target.value)}
-                className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#1D4840] text-sm"
+                className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#CE3627] text-sm"
                 required
               />
             </div>
@@ -154,7 +154,7 @@ export function NewOrderModal() {
               placeholder="Shipping Address (e.g. 10880 Wilshire Blvd, Los Angeles)"
               value={shippingAddress}
               onChange={(e) => setShippingAddress(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#1D4840] text-sm"
+              className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#CE3627] text-sm"
             />
           </div>
         </div>
@@ -168,7 +168,7 @@ export function NewOrderModal() {
             <button
               type="button"
               onClick={handleAddItem}
-              className="text-xs font-semibold text-[#1D4840] flex items-center gap-1 hover:underline"
+              className="text-xs font-semibold text-[#CE3627] flex items-center gap-1 hover:underline"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Add Item</span>
@@ -239,12 +239,12 @@ export function NewOrderModal() {
         </div>
 
         {/* Live Total Bar */}
-        <div className="p-4 rounded-2xl bg-[#E8EDEC] flex items-center justify-between border border-[#1D4840]/20">
+        <div className="p-4 rounded-2xl bg-[#FEF1ED] flex items-center justify-between border border-[#F7D7D1]">
           <div>
-            <span className="text-xs text-[#1D4840] font-medium block">Total Order Amount</span>
+            <span className="text-xs text-[#CE3627] font-medium block">Total Order Amount</span>
             <span className="text-xs text-[#71717A]">{selectedItems.length} product(s) selected</span>
           </div>
-          <span className="text-2xl font-bold text-[#1D4840]">${calculatedTotal}</span>
+          <span className="text-2xl font-bold text-[#CE3627]">${calculatedTotal}</span>
         </div>
 
         {/* Footer Actions */}

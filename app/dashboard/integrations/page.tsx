@@ -30,7 +30,7 @@ export default function IntegrationsPage() {
             </p>
           </div>
 
-          <div className="flex items-center gap-2 text-xs font-semibold text-[#1D4840] bg-[#E8EDEC] px-3.5 py-2 rounded-full">
+          <div className="flex items-center gap-2 text-xs font-semibold text-[#CE3627] bg-[#FEF1ED] border border-[#F7D7D1] px-3.5 py-2 rounded-full">
             <Layers className="w-4 h-4" />
             <span>
               {integrations.filter((i) => i.enabled).length} of {integrations.length} Active
@@ -47,7 +47,7 @@ export default function IntegrationsPage() {
               className={cn(
                 'px-4 py-1.5 rounded-full text-xs font-semibold transition-all',
                 selectedCategory === cat
-                  ? 'bg-[#1D4840] text-white shadow-xs'
+                  ? 'bg-[#CE3627] text-white shadow-xs'
                   : 'text-[#71717A] hover:text-[#000000] hover:bg-black/5'
               )}
             >
@@ -61,12 +61,12 @@ export default function IntegrationsPage() {
           {filtered.map((item) => (
             <div
               key={item.id}
-              className="bg-white rounded-3xl p-6 border border-[#E2E2E2] shadow-sm flex flex-col justify-between hover:border-[#1D4840]/30 transition-all"
+              className="bg-white rounded-3xl p-6 border border-[#E2E2E2] shadow-sm flex flex-col justify-between hover:border-[#CE3627]/30 transition-all"
             >
               <div>
                 {/* Top Row: Icon + Toggle Switch */}
                 <div className="flex items-start justify-between mb-4">
-                  <div className="w-12 h-12 rounded-2xl bg-[#F6F6F6] border border-[#E2E2E2] flex items-center justify-center text-lg font-bold text-[#1D4840] shadow-xs">
+                  <div className="w-12 h-12 rounded-2xl bg-[#F6F6F6] border border-[#E2E2E2] flex items-center justify-center text-lg font-bold text-[#CE3627] shadow-xs">
                     {item.name.charAt(0)}
                   </div>
 
@@ -75,7 +75,7 @@ export default function IntegrationsPage() {
                     onClick={() => toggleIntegration(item.id)}
                     className={cn(
                       'w-12 h-7 rounded-full p-1 transition-colors relative focus:outline-none',
-                      item.enabled ? 'bg-[#1D4840]' : 'bg-[#E2E2E2]'
+                      item.enabled ? 'bg-[#CE3627]' : 'bg-[#E2E2E2]'
                     )}
                     role="switch"
                     aria-checked={item.enabled}

@@ -27,8 +27,8 @@ export function RevenueBarChart() {
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-[#1D4840] text-white p-3 rounded-2xl shadow-xl border border-[#97DF68]/30 text-xs">
-          <p className="font-semibold mb-1 text-[#97DF68]">{label}</p>
+        <div className="bg-[#000000] text-white p-3 rounded-2xl shadow-xl border border-[#CE3627]/30 text-xs">
+          <p className="font-semibold mb-1 text-[#FF5461]">{label}</p>
           <p className="flex items-center justify-between gap-4">
             <span className="text-gray-300">This period:</span>
             <span className="font-bold">${payload[0].value.toLocaleString()}</span>
@@ -71,7 +71,7 @@ export function RevenueBarChart() {
 
         <div className="flex items-center gap-4 text-xs font-medium text-[#71717A]">
           <div className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#97DF68]" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[#CE3627]" />
             <span>This week</span>
           </div>
           <div className="flex items-center gap-1.5">
@@ -100,8 +100,8 @@ export function RevenueBarChart() {
               ticks={[0, 10000, 20000, 30000, 40000]}
             />
             <Tooltip content={<CustomTooltip />} cursor={{ fill: 'transparent' }} />
-            <Bar dataKey="thisWeek" fill="#97DF68" radius={[12, 12, 0, 0]} maxBarSize={32} />
-            <Bar dataKey="lastWeek" fill="#E8EDEC" radius={[12, 12, 0, 0]} maxBarSize={32} />
+            <Bar dataKey="thisWeek" fill="#CE3627" radius={[12, 12, 0, 0]} maxBarSize={32} />
+            <Bar dataKey="lastWeek" fill="#F0F0F0" radius={[12, 12, 0, 0]} maxBarSize={32} />
           </BarChart>
         </ResponsiveContainer>
       </div>

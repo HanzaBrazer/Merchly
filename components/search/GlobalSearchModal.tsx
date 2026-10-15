@@ -91,7 +91,7 @@ export function GlobalSearchModal() {
                     className="w-full flex items-center justify-between p-2.5 rounded-2xl hover:bg-[#F6F6F6] text-left transition-colors group"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-xl bg-[#F6F6F6] border border-[#E2E2E2] flex items-center justify-center text-[#1D4840]">
+                      <div className="w-8 h-8 rounded-xl bg-[#F6F6F6] border border-[#E2E2E2] flex items-center justify-center text-[#CE3627]">
                         <Package className="w-4 h-4" />
                       </div>
                       <div>
@@ -124,7 +124,7 @@ export function GlobalSearchModal() {
                     className="w-full flex items-center justify-between p-2.5 rounded-2xl hover:bg-[#F6F6F6] text-left transition-colors"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-xl bg-[#F6F6F6] border border-[#E2E2E2] flex items-center justify-center text-[#1D4840]">
+                      <div className="w-8 h-8 rounded-xl bg-[#F6F6F6] border border-[#E2E2E2] flex items-center justify-center text-[#CE3627]">
                         <ShoppingBag className="w-4 h-4" />
                       </div>
                       <div>
@@ -159,7 +159,7 @@ export function GlobalSearchModal() {
                     className="w-full flex items-center justify-between p-2.5 rounded-2xl hover:bg-[#F6F6F6] text-left transition-colors"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-xl bg-[#F6F6F6] border border-[#E2E2E2] flex items-center justify-center text-[#1D4840]">
+                      <div className="w-8 h-8 rounded-xl bg-[#F6F6F6] border border-[#E2E2E2] flex items-center justify-center text-[#CE3627]">
                         <MessageCircle className="w-4 h-4" />
                       </div>
                       <div>

@@ -68,7 +68,7 @@ export function ProductModal() {
               placeholder="e.g. Nordic Lounge Chair"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#1D4840] text-sm"
+              className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#CE3627] text-sm"
               required
             />
           </div>
@@ -82,7 +82,7 @@ export function ProductModal() {
               placeholder="e.g. NRD-CHR-09"
               value={sku}
               onChange={(e) => setSku(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#1D4840] text-sm"
+              className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#CE3627] text-sm"
               required
             />
           </div>
@@ -96,7 +96,7 @@ export function ProductModal() {
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#1D4840] text-sm bg-white"
+              className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#CE3627] text-sm bg-white"
             >
               <option value="Chair">Chair</option>
               <option value="Table">Table</option>
@@ -114,7 +114,7 @@ export function ProductModal() {
             <select
               value={status}
               onChange={(e) => setStatus(e.target.value as ProductStatus)}
-              className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#1D4840] text-sm bg-white"
+              className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#CE3627] text-sm bg-white"
             >
               <option value="published">Published</option>
               <option value="draft">Draft</option>
@@ -135,7 +135,7 @@ export function ProductModal() {
               step="1"
               value={price}
               onChange={(e) => setPrice(Number(e.target.value))}
-              className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#1D4840] text-sm"
+              className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#CE3627] text-sm"
               required
             />
           </div>
@@ -150,7 +150,7 @@ export function ProductModal() {
               step="1"
               value={cost}
               onChange={(e) => setCost(Number(e.target.value))}
-              className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#1D4840] text-sm"
+              className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#CE3627] text-sm"
             />
           </div>
         </div>
@@ -166,7 +166,7 @@ export function ProductModal() {
               min="0"
               value={stock}
               onChange={(e) => setStock(Number(e.target.value))}
-              className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#1D4840] text-sm"
+              className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#CE3627] text-sm"
               required
             />
           </div>
@@ -180,7 +180,7 @@ export function ProductModal() {
               min="1"
               value={reorderPoint}
               onChange={(e) => setReorderPoint(Number(e.target.value))}
-              className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#1D4840] text-sm"
+              className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#CE3627] text-sm"
               required
             />
           </div>
@@ -195,7 +195,7 @@ export function ProductModal() {
             type="url"
             value={imageUrl}
             onChange={(e) => setImageUrl(e.target.value)}
-            className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#1D4840] text-sm"
+            className="w-full px-4 py-2.5 rounded-2xl border border-[#E2E2E2] focus:outline-none focus:border-[#CE3627] text-sm"
             placeholder="https://..."
           />
         </div>

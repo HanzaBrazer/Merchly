@@ -2,18 +2,19 @@ import React, { forwardRef } from 'react';
 import { cn } from '@/lib/utils';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'mint' | 'outline' | 'secondary' | 'danger' | 'ghost';
+  variant?: 'primary' | 'mint' | 'accent' | 'outline' | 'secondary' | 'danger' | 'ghost';
   size?: 'sm' | 'md' | 'lg' | 'icon';
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = 'primary', size = 'md', children, disabled, ...props }, ref) => {
     const baseStyles =
-      'inline-flex items-center justify-center font-medium rounded-full transition-all focus:outline-none focus:ring-2 focus:ring-[#1D4840]/20 disabled:opacity-50 disabled:pointer-events-none active:scale-[0.98] select-none';
+      'inline-flex items-center justify-center font-medium rounded-full transition-all focus:outline-none focus:ring-2 focus:ring-[#CE3627]/20 disabled:opacity-50 disabled:pointer-events-none active:scale-[0.98] select-none';
 
     const variants = {
-      primary: 'bg-[#1D4840] text-white hover:bg-[#163731] shadow-sm',
-      mint: 'bg-[#97DF68] text-[#1D4840] hover:bg-[#85cc57] font-semibold shadow-sm',
+      primary: 'bg-[#CE3627] text-white hover:bg-[#B72E20] shadow-sm',
+      mint: 'bg-[#FEF1ED] text-[#CE3627] border border-[#F7D7D1] hover:bg-[#FDE2D9] font-semibold shadow-xs',
+      accent: 'bg-[#FEF1ED] text-[#CE3627] border border-[#F7D7D1] hover:bg-[#FDE2D9] font-semibold shadow-xs',
       outline: 'border border-[#E2E2E2] bg-white text-[#000000] hover:bg-[#F6F6F6] hover:border-[#D3D3D3]',
       secondary: 'bg-[#F0F0F0] text-[#000000] hover:bg-[#E5E5E5]',
       danger: 'bg-[#FFE6E7] text-[#FF0013] hover:bg-[#FFD4D6] border border-[#FF0013]/20',

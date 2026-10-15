@@ -28,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} antialiased h-full`}>
-      <body className="min-h-full flex flex-col bg-[#F6F6F6] text-[#000000] selection:bg-[#97DF68] selection:text-[#1D4840]">
+      <body className="min-h-full flex flex-col bg-[#F6F6F6] text-[#000000] selection:bg-[#FEF1ED] selection:text-[#CE3627]">
         <MerchlyProvider>
           {children}
           <Toaster

@@ -85,7 +85,7 @@ export function Sidebar({ onItemClick }: SidebarProps) {
                   )}
                 >
                   <div className="flex items-center gap-3">
-                    <Icon className={cn('w-5 h-5', isActive ? 'text-[#1D4840]' : 'text-[#71717A]')} />
+                    <Icon className={cn('w-5 h-5', isActive ? 'text-[#CE3627]' : 'text-[#71717A]')} />
                     <span>{item.label}</span>
                   </div>
 
@@ -122,7 +122,7 @@ export function Sidebar({ onItemClick }: SidebarProps) {
                       : 'text-[#71717A] hover:text-[#000000] hover:bg-black/5'
                   )}
                 >
-                  <Icon className={cn('w-5 h-5', isActive ? 'text-[#1D4840]' : 'text-[#71717A]')} />
+                  <Icon className={cn('w-5 h-5', isActive ? 'text-[#CE3627]' : 'text-[#71717A]')} />
                   <span>{item.label}</span>
                 </Link>
               );
@@ -166,7 +166,7 @@ export function Sidebar({ onItemClick }: SidebarProps) {
       <div className="mt-4 pt-4 border-t border-[#E2E2E2]/60">
         <div className="bg-[#F6F6F6] rounded-2xl p-3.5 flex flex-col gap-2.5">
           <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-xl bg-[#97DF68] flex items-center justify-center text-[#1D4840]">
+            <div className="w-7 h-7 rounded-xl bg-[#FEF1ED] border border-[#F7D7D1] flex items-center justify-center text-[#CE3627]">
               <Sparkles className="w-4 h-4" />
             </div>
             <span className="text-xs font-bold text-[#000000]">Productive with AI</span>
@@ -177,7 +177,7 @@ export function Sidebar({ onItemClick }: SidebarProps) {
           </p>
 
           <Button
-            variant="mint"
+            variant="primary"
             size="sm"
             className="w-full text-xs font-bold py-2 shadow-xs"
             onClick={() => {
