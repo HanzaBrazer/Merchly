@@ -1,29 +1,76 @@
 @import "tailwindcss";
 
+@theme {
+  --color-primary: #CE3627;
+  --color-primary-hover: #B72E20;
+  --color-primary-50: #FEF1ED;
+  --color-primary-100: #F7D7D1;
+  --color-primary-200: #F0AEA4;
+  --color-primary-300: #E67F71;
+  --color-primary-400: #DE5344;
+  --color-primary-500: #CE3627;
+  --color-primary-600: #B72E20;
+  --color-primary-700: #8E2319;
+  --color-primary-800: #681A12;
+  --color-primary-900: #4A1512;
+  --color-primary-light: #FEF1ED;
+  --color-primary-border: #F7D7D1;
+  --color-primary-dark: #4A1512;
+  
+  --color-coral: #FF7A6B;
+
+  --color-neutral-50: #F6F6F6;
+  --color-neutral-100: #E2E2E2;
+  --color-neutral-200: #D3D3D3;
+  --color-neutral-500: #A0A0A0;
+  --color-neutral-600: #71717A;
+  --color-neutral-900: #000000;
+
+  --color-semantic-success: #0E8F21;
+  --color-semantic-success-light: #E7F4E9;
+  --color-semantic-danger: #FF0013;
+  --color-semantic-danger-light: #FFE6E7;
+  --color-semantic-warning: #FF9500;
+  --color-semantic-warning-light: #FFF4E6;
+  --color-semantic-informative: #0051FF;
+  --color-semantic-informative-light: #EBF1FF;
+
+  --font-sans: 'Geist', var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  --radius-pill: 9999px;
+  --radius-card: 28px;
+  --radius-card-lg: 32px;
+  --radius-dialog: 32px;
+
+  --shadow-card: 0px 2px 4px 0px rgba(39, 39, 39, 0.05);
+  --shadow-hover: 0px 8px 16px 0px rgba(39, 39, 39, 0.08);
+  --shadow-modal: 0px 20px 40px -15px rgba(0, 0, 0, 0.12);
+}
+
 @layer base {
   :root {
-    --background: 0 0% 96.5%; /* #F6F6F6 */
-    --foreground: 0 0% 0%; /* #000000 */
-    --card: 0 0% 100%; /* #FFFFFF */
-    --card-foreground: 0 0% 0%;
-    --primary: 5 68% 48%; /* #CE3627 Primary Red */
-    --primary-foreground: 0 0% 100%;
-    --primary-light: 14 91% 96%; /* #FEF1ED Light Tint */
-    --primary-border: 10 73% 90%; /* #F7D7D1 Border Tint */
-    --primary-dark: 4 61% 18%; /* #4A1512 Dark Accent */
-    --muted: 0 0% 92%; /* #E8E8E8 */
-    --muted-foreground: 0 0% 45%; /* #71717A */
-    --border: 0 0% 88.6%; /* #E2E2E2 */
-    --success: 129 82% 31%; /* #0E8F21 */
-    --danger: 355 100% 50%; /* #FF0013 */
-    --warning: 36 100% 50%; /* #FF9900 */
+    --background: #F6F6F6;
+    --foreground: #000000;
+    --card: #FFFFFF;
+    --card-foreground: #000000;
+    --primary: #CE3627;
+    --primary-foreground: #FFFFFF;
+    --primary-light: #FEF1ED;
+    --primary-border: #F7D7D1;
+    --primary-dark: #4A1512;
+    --muted: #E8E8E8;
+    --muted-foreground: #71717A;
+    --border: #E2E2E2;
+    --success: #0E8F21;
+    --danger: #FF0013;
+    --warning: #FF9500;
   }
 }
 
 body {
   background-color: #F6F6F6;
   color: #000000;
-  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--font-geist-sans), 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
