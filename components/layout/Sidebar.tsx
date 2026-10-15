@@ -201,9 +201,14 @@ export function Sidebar({ onItemClick }: SidebarProps) {
             <LogOut className="w-4 h-4 text-[#71717A]" />
             <span>Keluar / Logout</span>
           </div>
-          <span className="text-[10px] bg-[#F6F6F6] border border-[#E2E2E2] px-1.5 py-0.5 rounded-full text-[#71717A]">
-            {currentUser?.name ? currentUser.name.split(' ')[0] : 'Raihan'}
-          </span>
+          <div className="flex items-center gap-1.5">
+            <span className="text-[10px] font-bold bg-[#FEF1ED] text-[#CE3627] border border-[#F7D7D1] px-1.5 py-0.5 rounded-full uppercase">
+              {currentUser?.role || 'owner'}
+            </span>
+            <span className="text-[10px] bg-[#F6F6F6] border border-[#E2E2E2] px-1.5 py-0.5 rounded-full text-[#71717A]">
+              {currentUser?.name ? currentUser.name.split(' ')[0] : 'Raihan'}
+            </span>
+          </div>
         </button>
       </div>
     </aside>

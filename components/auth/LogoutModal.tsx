@@ -32,13 +32,18 @@ export function LogoutModal() {
             <p className="text-sm font-bold text-[#4A1512]">
               Apakah Anda yakin ingin keluar dari akun?
             </p>
-            <p className="text-xs text-[#71717A] mt-0.5">
-              Anda sedang login sebagai{' '}
-              <span className="font-semibold text-[#000000]">
-                {currentUser?.name || 'Raihan Fahreza'}
-              </span>{' '}
-              ({currentUser?.email || 'raihan@merchly.com'}).
-            </p>
+            <div className="flex items-center gap-1.5 flex-wrap mt-1">
+              <span className="text-xs text-[#71717A]">
+                Login sebagai{' '}
+                <span className="font-semibold text-[#000000]">
+                  {currentUser?.name || 'Raihan Fahreza'}
+                </span>{' '}
+                ({currentUser?.email || 'raihan@merchly.com'})
+              </span>
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#FEF1ED] text-[#CE3627] border border-[#F7D7D1] uppercase">
+                {currentUser?.role || 'owner'}
+              </span>
+            </div>
           </div>
         </div>
 

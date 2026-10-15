@@ -8,12 +8,14 @@ import { Button } from '@/components/ui/Button';
 import { useMerchly } from '@/lib/store';
 import { toast } from 'sonner';
 import { TrendingUp, BarChart3, CheckCircle2 } from 'lucide-react';
+import { GoogleAuthModal } from '@/components/auth/GoogleAuthModal';
 
 export default function RegisterPage() {
   const router = useRouter();
   const { register } = useMerchly();
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isGoogleModalOpen, setIsGoogleModalOpen] = useState(false);
 
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
@@ -99,7 +101,7 @@ export default function RegisterPage() {
             <div className="grid grid-cols-2 gap-3 sm:gap-4">
               <button
                 type="button"
-                onClick={() => handleSocialRegister('Google')}
+                onClick={() => setIsGoogleModalOpen(true)}
                 className="w-full h-[47px] rounded-full border border-[#E8E8E8] bg-white hover:bg-[#F6F6F6] text-sm sm:text-base font-medium text-[#000000] flex items-center justify-center gap-2.5 transition-colors cursor-pointer"
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24">
@@ -215,6 +217,13 @@ export default function RegisterPage() {
           </div>
         </div>
       </div>
+
+      {/* Google Real Account Auth Modal */}
+      <GoogleAuthModal
+        isOpen={isGoogleModalOpen}
+        onClose={() => setIsGoogleModalOpen(false)}
+        redirectPath="/onboarding"
+      />
     </div>
   );
 }

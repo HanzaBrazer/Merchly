@@ -149,8 +149,13 @@ export function TopBar({ onOpenMobileMenu }: TopBarProps) {
           {isProfileMenuOpen && (
             <div className="absolute right-0 mt-2 w-64 bg-white rounded-2xl shadow-xl border border-[#E2E2E2] p-2 z-50 text-sm">
               <div className="px-3 py-2 border-b border-[#E2E2E2]/60">
-                <p className="font-semibold text-[#000000]">{currentUser?.name || 'Raihan Fahreza'}</p>
-                <p className="text-xs text-[#71717A]">{currentUser?.email || 'raihan@merchly.com'} • Owner</p>
+                <div className="flex items-center justify-between gap-2">
+                  <p className="font-semibold text-[#000000] truncate">{currentUser?.name || 'Raihan Fahreza'}</p>
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#FEF1ED] text-[#CE3627] border border-[#F7D7D1] uppercase shrink-0">
+                    {currentUser?.role || 'owner'}
+                  </span>
+                </div>
+                <p className="text-xs text-[#71717A] truncate mt-0.5">{currentUser?.email || 'raihan@merchly.com'}</p>
               </div>
 
               <div className="py-1">

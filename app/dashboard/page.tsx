@@ -272,9 +272,22 @@ export default function DashboardPage() {
         {/* Header Row: Welcome + Action Buttons (Figma Node 49:13312) */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl sm:text-[28px] font-medium tracking-tight text-[#000000]">
-              Welcome back, {ownerName}!
-            </h1>
+            <div className="flex items-center gap-2.5 flex-wrap">
+              <h1 className="text-2xl sm:text-[28px] font-medium tracking-tight text-[#000000]">
+                Welcome back, {ownerName}!
+              </h1>
+              <span
+                className={`text-xs font-bold px-2.5 py-0.5 rounded-full uppercase border shrink-0 ${
+                  currentUser?.role === 'admin'
+                    ? 'bg-[#EBF5FF] text-[#1E40AF] border-[#BFDBFE]'
+                    : currentUser?.role === 'staff'
+                    ? 'bg-[#F0FDF4] text-[#15803D] border-[#BBF7D0]'
+                    : 'bg-[#FEF1ED] text-[#CE3627] border-[#F7D7D1]'
+                }`}
+              >
+                {currentUser?.role === 'admin' ? '🛡️ Admin' : currentUser?.role === 'staff' ? '💼 Staff' : '👑 Owner'}
+              </span>
+            </div>
             <p className="text-base text-[#A0A0A0] mt-1 font-normal">
               Here are your dashboard overview
             </p>

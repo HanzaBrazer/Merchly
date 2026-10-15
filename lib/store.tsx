@@ -14,6 +14,7 @@ import {
   StockStatus,
   ProductStatus,
   CurrentUser,
+  MemberRole,
 } from './types';
 import {
   initialWorkspace,
@@ -32,9 +33,9 @@ interface MerchlyContextType {
   isAuthenticated: boolean;
   isLogoutModalOpen: boolean;
   setIsLogoutModalOpen: (open: boolean) => void;
-  login: (email?: string, name?: string) => void;
+  login: (email?: string, name?: string, role?: MemberRole, avatar?: string) => void;
   logout: () => void;
-  register: (email: string, name?: string) => void;
+  register: (email: string, name?: string, role?: MemberRole) => void;
   workspace: Workspace;
   products: Product[];
   orders: Order[];
@@ -140,13 +141,50 @@ export function MerchlyProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  const login = (email?: string, name?: string) => {
+  const login = (email?: string, name?: string, role?: MemberRole, avatar?: string) => {
+    const finalEmail = (email || 'raihan@merchly.com').trim();
+
+    // Auto-detect role if not explicitly provided
+    let finalRole: MemberRole = role || 'owner';
+    if (!role) {
+      const lower = finalEmail.toLowerCase();
+      if (lower.includes('admin') || lower.includes('dimas')) {
+        finalRole = 'admin';
+      } else if (lower.includes('staff') || lower.includes('sarah')) {
+        finalRole = 'staff';
+      } else {
+        finalRole = 'owner';
+      }
+    }
+
+    let finalName = name;
+    if (!finalName) {
+      if (finalRole === 'admin') {
+        finalName = 'Dimas Pratama';
+      } else if (finalRole === 'staff') {
+        finalName = 'Sarah Amelia';
+      } else {
+        finalName = 'Raihan Fahreza';
+      }
+    }
+
+    let finalAvatar = avatar;
+    if (!finalAvatar) {
+      if (finalRole === 'admin') {
+        finalAvatar = 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&auto=format&fit=crop&q=80';
+      } else if (finalRole === 'staff') {
+        finalAvatar = 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&auto=format&fit=crop&q=80';
+      } else {
+        finalAvatar = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80';
+      }
+    }
+
     const user: CurrentUser = {
-      id: 'user-raihan-01',
-      name: name || 'Raihan Fahreza',
-      email: email || 'raihan@merchly.com',
-      role: 'owner',
-      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80',
+      id: `user-${finalRole}-${Date.now()}`,
+      name: finalName,
+      email: finalEmail,
+      role: finalRole,
+      avatar: finalAvatar,
     };
     setCurrentUser(user);
     setIsAuthenticated(true);
@@ -168,8 +206,8 @@ export function MerchlyProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const register = (email: string, name?: string) => {
-    login(email, name);
+  const register = (email: string, name?: string, role?: MemberRole) => {
+    login(email, name, role);
   };
 
   // Save to local storage
