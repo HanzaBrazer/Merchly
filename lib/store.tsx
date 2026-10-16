@@ -28,6 +28,7 @@ import {
 } from './seedData';
 import { canAccess, PLAN_LIMITS } from './permissions';
 import { toast } from 'sonner';
+import { supabase, isSupabaseConfigured } from './supabase/client';
 
 interface MerchlyContextType {
   currentUser: CurrentUser | null;
@@ -165,6 +166,19 @@ export function MerchlyProvider({ children }: { children: ReactNode }) {
         if (parsed.conversations) setConversations(parsed.conversations);
         if (parsed.integrations) setIntegrations(parsed.integrations);
         if (parsed.teamMembers) setTeamMembers(parsed.teamMembers);
+      }
+
+      // If no saved localStorage auth, check active Supabase OAuth session
+      if (isSupabaseConfigured && !savedAuth) {
+        supabase.auth.getSession().then(({ data: { session } }) => {
+          if (session?.user) {
+            const email = session.user.email || '';
+            const metadata = session.user.user_metadata || {};
+            const name = metadata.full_name || metadata.name || email.split('@')[0];
+            const avatar = metadata.avatar_url || metadata.picture;
+            login(email, name, metadata.role, avatar);
+          }
+        });
       }
     } catch (e) {
       console.warn('Could not read from localStorage', e);

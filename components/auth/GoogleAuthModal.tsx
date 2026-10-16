@@ -115,7 +115,11 @@ export function GoogleAuthModal({
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${window.location.origin}/auth/callback?next=${redirectPath}`,
+          redirectTo: `${window.location.origin}/auth/callback?mode=login&next=${encodeURIComponent(redirectPath)}`,
+          queryParams: {
+            access_type: 'offline',
+            prompt: 'select_account',
+          },
         },
       });
       if (error) {

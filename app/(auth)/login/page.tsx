@@ -9,6 +9,7 @@ import { MemberRole } from '@/lib/types';
 import { toast } from 'sonner';
 import { Eye, EyeOff, ShieldCheck, CheckCircle2 } from 'lucide-react';
 import { GoogleAuthModal } from '@/components/auth/GoogleAuthModal';
+import { supabase, isSupabaseConfigured } from '@/lib/supabase/client';
 
 function LoginFormContent() {
   const router = useRouter();
@@ -22,6 +23,51 @@ function LoginFormContent() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isGoogleModalOpen, setIsGoogleModalOpen] = useState(false);
+
+  // Check URL error params
+  React.useEffect(() => {
+    const errorParam = searchParams?.get('error');
+    if (errorParam) {
+      toast.error(`Gagal login: ${errorParam.replace(/_/g, ' ')}`);
+    }
+  }, [searchParams]);
+
+  const handleGoogleLogin = async () => {
+    setIsLoading(true);
+    try {
+      if (!isSupabaseConfigured) {
+        setIsGoogleModalOpen(true);
+        return;
+      }
+
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/auth/callback?mode=login&next=${encodeURIComponent(redirectPath)}`,
+          queryParams: {
+            access_type: 'offline',
+            prompt: 'select_account',
+          },
+        },
+      });
+
+      if (error) {
+        if (
+          error.message.toLowerCase().includes('provider is not enabled') ||
+          error.message.toLowerCase().includes('unsupported provider')
+        ) {
+          setIsGoogleModalOpen(true);
+        } else {
+          toast.error(`Google Login: ${error.message}`);
+        }
+      }
+    } catch (err: any) {
+      toast.error('Gagal menghubungkan ke Google OAuth');
+      setIsGoogleModalOpen(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -174,9 +220,10 @@ function LoginFormContent() {
             <div className="grid grid-cols-2 gap-3 sm:gap-4">
               <button
                 type="button"
-                onClick={() => setIsGoogleModalOpen(true)}
-                className="w-full h-[47px] rounded-full border border-[#E8E8E8] bg-white hover:bg-[#F6F6F6] text-sm sm:text-base font-medium text-[#000000] flex items-center justify-center gap-2.5 transition-colors cursor-pointer shadow-xs"
-                title="Login dengan Akun Google"
+                onClick={handleGoogleLogin}
+                disabled={isLoading}
+                className="w-full h-[47px] rounded-full border border-[#E8E8E8] bg-white hover:bg-[#F6F6F6] text-sm sm:text-base font-medium text-[#000000] flex items-center justify-center gap-2.5 transition-colors cursor-pointer shadow-xs disabled:opacity-60"
+                title="Login dengan Akun Google (Real OAuth)"
               >
                 <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24">
                   <path

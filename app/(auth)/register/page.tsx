@@ -73,6 +73,53 @@ function RegisterContent() {
     }
   }, [step]);
 
+  // Check URL error & prefill email if redirected from login
+  useEffect(() => {
+    const errorParam = searchParams?.get('error');
+    const emailParam = searchParams?.get('email');
+    if (errorParam === 'not_registered') {
+      if (emailParam) setEmail(emailParam);
+      toast.error('Akun Google ini belum terdaftar di Merchly. Silakan selesaikan pendaftaran (Sign Up) terlebih dahulu.');
+    }
+  }, [searchParams]);
+
+  const handleGoogleRegister = async () => {
+    setIsLoading(true);
+    try {
+      if (!isSupabaseConfigured) {
+        setIsGoogleModalOpen(true);
+        return;
+      }
+
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/auth/callback?mode=register&next=/dashboard`,
+          queryParams: {
+            access_type: 'offline',
+            prompt: 'select_account',
+          },
+        },
+      });
+
+      if (error) {
+        if (
+          error.message.toLowerCase().includes('provider is not enabled') ||
+          error.message.toLowerCase().includes('unsupported provider')
+        ) {
+          setIsGoogleModalOpen(true);
+        } else {
+          toast.error(`Google Sign Up: ${error.message}`);
+        }
+      }
+    } catch (err: any) {
+      toast.error('Gagal menghubungkan ke Google OAuth');
+      setIsGoogleModalOpen(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   // Step 1: Validate Email and proceed to Step 2
   const handleEmailContinue = (e: React.FormEvent) => {
     e.preventDefault();
@@ -267,8 +314,10 @@ function RegisterContent() {
                 <div className="grid grid-cols-2 gap-3 sm:gap-4">
                   <button
                     type="button"
-                    onClick={() => setIsGoogleModalOpen(true)}
-                    className="w-full h-[47px] rounded-full border border-[#E8E8E8] bg-white hover:bg-[#F6F6F6] text-sm sm:text-base font-medium text-[#000000] flex items-center justify-center gap-2.5 transition-colors cursor-pointer shadow-xs"
+                    onClick={handleGoogleRegister}
+                    disabled={isLoading}
+                    className="w-full h-[47px] rounded-full border border-[#E8E8E8] bg-white hover:bg-[#F6F6F6] text-sm sm:text-base font-medium text-[#000000] flex items-center justify-center gap-2.5 transition-colors cursor-pointer shadow-xs disabled:opacity-60"
+                    title="Daftar dengan Akun Google (Real OAuth)"
                   >
                     <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24">
                       <path
