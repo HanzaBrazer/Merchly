@@ -35,11 +35,6 @@ function LoginFormContent() {
   const handleGoogleLogin = async () => {
     setIsLoading(true);
     try {
-      if (!isSupabaseConfigured) {
-        setIsGoogleModalOpen(true);
-        return;
-      }
-
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
@@ -52,19 +47,18 @@ function LoginFormContent() {
       });
 
       if (error) {
-        if (
-          error.message.toLowerCase().includes('provider is not enabled') ||
-          error.message.toLowerCase().includes('unsupported provider')
-        ) {
-          setIsGoogleModalOpen(true);
-        } else {
-          toast.error(`Google Login: ${error.message}`);
-        }
+        toast.error(`Google Login: ${error.message}`);
+        setIsLoading(false);
+        return;
+      }
+
+      if (data?.url) {
+        window.location.href = data.url;
+        return;
       }
     } catch (err: any) {
+      console.error('Google OAuth error:', err);
       toast.error('Gagal menghubungkan ke Google OAuth');
-      setIsGoogleModalOpen(true);
-    } finally {
       setIsLoading(false);
     }
   };
