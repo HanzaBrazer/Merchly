@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useMerchly } from '@/lib/store';
 import { MemberRole } from '@/lib/types';
 import { toast } from 'sonner';
-import { X, UserPlus, Check, Sparkles, Shield, ArrowLeft, ExternalLink, Settings2, Database, Globe } from 'lucide-react';
+import { X, UserPlus, Check, Sparkles, Shield, ArrowLeft, ExternalLink, Settings2, Database, Globe, Copy, AlertTriangle } from 'lucide-react';
 import { supabase, isSupabaseConfigured } from '@/lib/supabase/client';
 
 interface GoogleAuthModalProps {
@@ -62,6 +62,19 @@ export function GoogleAuthModal({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [googleClientId, setGoogleClientId] = useState('');
   const [showConfig, setShowConfig] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const callbackUrl = 'https://vsoxcoawjcgbppxcsrch.supabase.co/auth/v1/callback';
+
+  const copyCallbackUrl = () => {
+    try {
+      navigator.clipboard.writeText(callbackUrl);
+      setCopied(true);
+      toast.success('Callback URL Supabase berhasil disalin!');
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      toast.info(`Callback URL: ${callbackUrl}`);
+    }
+  };
 
   // Sync saved accounts from local storage
   useEffect(() => {
@@ -231,6 +244,50 @@ export function GoogleAuthModal({
         <div className="p-6 pt-4 max-h-[480px] overflow-y-auto">
           {!isAddingCustom ? (
             <div className="space-y-3">
+              {/* Alert: Google Provider Setup Status */}
+              <div className="p-3.5 rounded-2xl bg-[#FFF8E1] border border-[#FFE082] text-xs space-y-2">
+                <div className="flex items-center gap-2 font-semibold text-[#8D6E63]">
+                  <AlertTriangle className="w-4 h-4 text-[#F57C00] shrink-0" />
+                  <span>Google OAuth Perlu Dihubungkan di Supabase</span>
+                </div>
+                <p className="text-[11px] text-[#5D4037] leading-relaxed">
+                  Supabase belum mengaktifkan Google karena belum ada <strong>Client ID &amp; Secret</strong> dari Google Cloud Console Anda.
+                </p>
+                <div className="pt-1 flex flex-col gap-1.5">
+                  <div className="flex items-center gap-2 bg-white/90 p-2 rounded-xl border border-[#FFE082]">
+                    <span className="text-[10px] font-mono text-[#5D4037] truncate flex-1">{callbackUrl}</span>
+                    <button
+                      type="button"
+                      onClick={copyCallbackUrl}
+                      className="px-2.5 py-1 rounded-md bg-[#F57C00] hover:bg-[#E65100] text-white text-[10px] font-bold transition-colors flex items-center gap-1 shrink-0 cursor-pointer shadow-xs"
+                    >
+                      {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+                      <span>{copied ? 'Tersalin' : 'Copy URL'}</span>
+                    </button>
+                  </div>
+                  <div className="flex items-center justify-between pt-0.5 text-[11px]">
+                    <a
+                      href="https://console.cloud.google.com/apis/credentials"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#1a73e8] hover:underline font-medium inline-flex items-center gap-1"
+                    >
+                      <span>1. Buat di Google Cloud</span>
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                    <a
+                      href="https://supabase.com/dashboard/project/vsoxcoawjcgbppxcsrch/auth/providers"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#15803D] hover:underline font-medium inline-flex items-center gap-1"
+                    >
+                      <span>2. Simpan di Supabase</span>
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+
               {/* Account List */}
               <div className="divide-y divide-[#F0F0F0] border border-[#E8E8E8] rounded-2xl overflow-hidden bg-white shadow-xs">
                 {accounts.map((acc) => (
