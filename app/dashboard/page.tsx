@@ -314,15 +314,17 @@ export default function DashboardPage() {
               )}
             </button>
 
-            {/* Adjust Widget Pill Button */}
-            <button
-              type="button"
-              onClick={() => setIsAdjustWidgetOpen(true)}
-              className="h-[47px] px-5 rounded-full bg-[#CE3627] text-white hover:bg-[#B72E20] transition-colors text-base font-normal flex items-center gap-2 whitespace-nowrap shadow-xs cursor-pointer select-none"
-            >
-              <LayoutGrid className="w-5 h-5 text-white" />
-              <span>Adjust Widget</span>
-            </button>
+            {/* Adjust Widget Pill Button (DESIGN.md §15: Hidden for Staff) */}
+            {currentUser?.role !== 'staff' && (
+              <button
+                type="button"
+                onClick={() => setIsAdjustWidgetOpen(true)}
+                className="h-[47px] px-5 rounded-full bg-[#CE3627] text-white hover:bg-[#B72E20] transition-colors text-base font-normal flex items-center gap-2 whitespace-nowrap shadow-xs cursor-pointer select-none"
+              >
+                <LayoutGrid className="w-5 h-5 text-white" />
+                <span>Adjust Widget</span>
+              </button>
+            )}
           </div>
         </div>
 

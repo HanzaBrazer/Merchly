@@ -7,112 +7,8 @@ import { Logo } from '@/components/ui/Logo';
 import { useMerchly } from '@/lib/store';
 import { MemberRole } from '@/lib/types';
 import { toast } from 'sonner';
-import { Eye, EyeOff, Sparkles, ShieldCheck, CheckCircle2, Crown, Shield, Briefcase } from 'lucide-react';
+import { Eye, EyeOff, ShieldCheck, CheckCircle2 } from 'lucide-react';
 import { GoogleAuthModal } from '@/components/auth/GoogleAuthModal';
-
-interface RoleProfile {
-  role: MemberRole;
-  label: string;
-  name: string;
-  email: string;
-  password: string;
-  badge: string;
-  title: string;
-  avatar: string;
-  tagColor: string;
-  tagBg: string;
-  tagBorder: string;
-  stat1Label: string;
-  stat1Value: string;
-  stat1Sub: string;
-  stat2Label: string;
-  stat2Value: string;
-  stat2Sub: string;
-  highlights: [string, string];
-}
-
-const ROLE_PROFILES: Record<MemberRole, RoleProfile> = {
-  owner: {
-    role: 'owner',
-    label: '👑 Owner',
-    name: 'Raihan Fahreza',
-    email: 'raihan@merchly.com',
-    password: 'password123',
-    badge: 'Owner Access',
-    title: 'Store Owner • Nordic Furniture',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80',
-    tagColor: '#CE3627',
-    tagBg: '#FEF1ED',
-    tagBorder: '#F7D7D1',
-    stat1Label: 'Total Revenue',
-    stat1Value: '$432,500',
-    stat1Sub: '↑ 12% vs last month',
-    stat2Label: 'Active Orders',
-    stat2Value: '1,280 pcs',
-    stat2Sub: 'Ready for fulfillment',
-    highlights: ['Direct access to sales & orders', 'Full store settings & RBAC control'],
-  },
-  admin: {
-    role: 'admin',
-    label: '🛡️ Admin',
-    name: 'Dimas Pratama',
-    email: 'admin@merchly.com',
-    password: 'admin123',
-    badge: 'Admin Access',
-    title: 'Store Administrator • Operations',
-    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&auto=format&fit=crop&q=80',
-    tagColor: '#1E40AF',
-    tagBg: '#EBF5FF',
-    tagBorder: '#BFDBFE',
-    stat1Label: 'Catalog Items',
-    stat1Value: '48 SKUs',
-    stat1Sub: 'Realtime stock sync active',
-    stat2Label: 'Fulfillment Rate',
-    stat2Value: '98.4%',
-    stat2Sub: 'Orders handled this week',
-    highlights: ['Inventory adjustments & reorders', 'Order processing & team management'],
-  },
-  staff: {
-    role: 'staff',
-    label: '💼 Staff',
-    name: 'Sarah Amelia',
-    email: 'staff@merchly.com',
-    password: 'staff123',
-    badge: 'Staff Access',
-    title: 'Fulfillment & Customer Care Staff',
-    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&auto=format&fit=crop&q=80',
-    tagColor: '#15803D',
-    tagBg: '#F0FDF4',
-    tagBorder: '#BBF7D0',
-    stat1Label: 'Pending Queue',
-    stat1Value: '34 Orders',
-    stat1Sub: 'Requires shipping label',
-    stat2Label: 'Customer CSAT',
-    stat2Value: '4.9 / 5.0',
-    stat2Sub: 'Gemini AI assisted support',
-    highlights: ['Realtime Gemini customer chat', 'Packing, tracking & delivery status'],
-  },
-  viewer: {
-    role: 'viewer',
-    label: '👁️ Viewer',
-    name: 'Guest Viewer',
-    email: 'viewer@merchly.com',
-    password: 'password123',
-    badge: 'Viewer Access',
-    title: 'Read-only Analyst',
-    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80',
-    tagColor: '#4B5563',
-    tagBg: '#F3F4F6',
-    tagBorder: '#E5E7EB',
-    stat1Label: 'Metrics Access',
-    stat1Value: 'Read-only',
-    stat1Sub: 'No modification access',
-    stat2Label: 'Reports View',
-    stat2Value: 'Enabled',
-    stat2Sub: 'Analytics overview',
-    highlights: ['Dashboard read-only visibility', 'Export reports & metrics'],
-  },
-};
 
 function LoginFormContent() {
   const router = useRouter();
@@ -120,25 +16,12 @@ function LoginFormContent() {
   const redirectPath = searchParams?.get('redirect') || '/dashboard';
 
   const { login } = useMerchly();
-  const [selectedRole, setSelectedRole] = useState<MemberRole>('owner');
-  const [email, setEmail] = useState('raihan@merchly.com');
+  const [email, setEmail] = useState('raihanfahreza04@gmail.com');
   const [password, setPassword] = useState('password123');
   const [rememberMe, setRememberMe] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isGoogleModalOpen, setIsGoogleModalOpen] = useState(false);
-
-  const activeProfile = ROLE_PROFILES[selectedRole] || ROLE_PROFILES.owner;
-
-  // Handle Role Tab Click
-  const handleSelectRole = (role: MemberRole) => {
-    setSelectedRole(role);
-    const profile = ROLE_PROFILES[role];
-    if (profile) {
-      setEmail(profile.email);
-      setPassword(profile.password);
-    }
-  };
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -149,24 +32,23 @@ function LoginFormContent() {
 
     setIsLoading(true);
 
-    // Deduce or map user identity
     const normalizedEmail = email.toLowerCase().trim();
-    let determinedRole: MemberRole = selectedRole;
-    let userName = activeProfile.name;
-    let userAvatar = activeProfile.avatar;
+    let determinedRole: MemberRole = 'owner';
+    let userName = 'Raihan Fahreza';
+    let userAvatar = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80';
 
-    if (normalizedEmail.includes('admin') || normalizedEmail.includes('dimas')) {
+    if (normalizedEmail === 'raihanreza004@gmail.com' || normalizedEmail.includes('admin')) {
       determinedRole = 'admin';
-      userName = 'Dimas Pratama';
-      userAvatar = ROLE_PROFILES.admin.avatar;
-    } else if (normalizedEmail.includes('staff') || normalizedEmail.includes('sarah')) {
+      userName = normalizedEmail === 'raihanreza004@gmail.com' ? 'Raihan Reza' : 'Dimas Pratama';
+      userAvatar = 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&auto=format&fit=crop&q=80';
+    } else if (normalizedEmail.includes('staff')) {
       determinedRole = 'staff';
       userName = 'Sarah Amelia';
-      userAvatar = ROLE_PROFILES.staff.avatar;
-    } else if (normalizedEmail.includes('raihan') || normalizedEmail.includes('owner')) {
+      userAvatar = 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&auto=format&fit=crop&q=80';
+    } else if (normalizedEmail === 'raihanfahreza04@gmail.com' || normalizedEmail.includes('raihan')) {
       determinedRole = 'owner';
       userName = 'Raihan Fahreza';
-      userAvatar = ROLE_PROFILES.owner.avatar;
+      userAvatar = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80';
     }
 
     login(email, userName, determinedRole, userAvatar);
@@ -178,7 +60,7 @@ function LoginFormContent() {
 
   const handleAppleLogin = () => {
     setIsLoading(true);
-    login(`raihan.apple@merchly.com`, 'Raihan Fahreza', 'owner');
+    login('raihanfahreza04@gmail.com', 'Raihan Fahreza', 'owner');
     toast.success('Berhasil login via Apple sebagai Raihan Fahreza (Owner)!');
     setTimeout(() => {
       router.push(redirectPath);
@@ -188,83 +70,31 @@ function LoginFormContent() {
   return (
     <div className="min-h-screen bg-[#F6F6F6] p-4 sm:p-6 lg:p-8 flex items-center justify-center">
       <div className="w-full max-w-[1400px] min-h-[750px] lg:h-[880px] grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
-        {/* Left Side: Login Form Card (Figma Node 9:3678) */}
-        <div className="bg-white rounded-[32px] sm:rounded-[40px] p-6 sm:p-10 lg:p-14 flex flex-col justify-between border border-[#E2E2E2] shadow-sm">
+        {/* Left Side: Login Form Card (Figma Node 9:3678 Replica - No Pill Switcher) */}
+        <div className="bg-white rounded-[32px] sm:rounded-[40px] p-6 sm:p-12 lg:p-16 flex flex-col justify-between border border-[#E2E2E2] shadow-sm">
           <div>
-            {/* Top Logo & 1-Click Role Switcher */}
-            <div className="mb-6 flex items-center justify-between flex-wrap gap-2">
+            {/* Top Logo */}
+            <div className="mb-8">
               <Link href="/" className="inline-block">
                 <Logo className="w-9 h-9" />
               </Link>
-
-              {/* 1-Click Role Selection Pills */}
-              <div className="flex items-center gap-1.5 p-1 bg-[#F6F6F6] rounded-full border border-[#E8E8E8]">
-                <button
-                  type="button"
-                  onClick={() => handleSelectRole('owner')}
-                  className={`px-3 py-1 rounded-full text-xs font-semibold transition-all cursor-pointer ${
-                    selectedRole === 'owner'
-                      ? 'bg-[#CE3627] text-white shadow-xs'
-                      : 'text-[#71717A] hover:text-[#000000]'
-                  }`}
-                  title="Masuk sebagai Owner (Raihan Fahreza)"
-                >
-                  👑 Owner
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleSelectRole('admin')}
-                  className={`px-3 py-1 rounded-full text-xs font-semibold transition-all cursor-pointer ${
-                    selectedRole === 'admin'
-                      ? 'bg-[#1E40AF] text-white shadow-xs'
-                      : 'text-[#71717A] hover:text-[#000000]'
-                  }`}
-                  title="Masuk sebagai Admin (Dimas Pratama)"
-                >
-                  🛡️ Admin
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleSelectRole('staff')}
-                  className={`px-3 py-1 rounded-full text-xs font-semibold transition-all cursor-pointer ${
-                    selectedRole === 'staff'
-                      ? 'bg-[#15803D] text-white shadow-xs'
-                      : 'text-[#71717A] hover:text-[#000000]'
-                  }`}
-                  title="Masuk sebagai Staff (Sarah Amelia)"
-                >
-                  💼 Staff
-                </button>
-              </div>
             </div>
 
             {/* Form Title & Subtitle */}
-            <div className="space-y-1.5 mb-6">
-              <div className="flex items-center gap-2">
-                <h1 className="text-2xl sm:text-3xl font-medium tracking-tight text-[#000000]">
-                  Welcome Back
-                </h1>
-                <span
-                  className="text-xs font-bold px-2.5 py-0.5 rounded-full uppercase"
-                  style={{
-                    backgroundColor: activeProfile.tagBg,
-                    color: activeProfile.tagColor,
-                    border: `1px solid ${activeProfile.tagBorder}`,
-                  }}
-                >
-                  {activeProfile.role}
-                </span>
-              </div>
+            <div className="space-y-2 mb-8">
+              <h1 className="text-2xl sm:text-3xl font-medium tracking-tight text-[#000000]">
+                Welcome Back
+              </h1>
               <p className="text-sm sm:text-base text-[#A0A0A0]">
-                Masuk ke akun <span className="font-semibold text-[#000000]">{activeProfile.name}</span> atau pilih akun lain.
+                Enter your email and password to access your dashboard.
               </p>
             </div>
 
             {/* Form */}
-            <form onSubmit={handleLogin} className="space-y-4">
+            <form onSubmit={handleLogin} className="space-y-5">
               {/* Email */}
               <div className="space-y-1.5">
-                <label className="text-sm font-medium text-[#000000] block">
+                <label className="text-sm sm:text-base font-normal text-[#000000] block">
                   Email
                 </label>
                 <input
@@ -279,7 +109,7 @@ function LoginFormContent() {
 
               {/* Password with Eye Icon */}
               <div className="space-y-1.5">
-                <label className="text-sm font-medium text-[#000000] block">
+                <label className="text-sm sm:text-base font-normal text-[#000000] block">
                   Password
                 </label>
                 <div className="relative">
@@ -294,7 +124,7 @@ function LoginFormContent() {
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-[#A0A0A0] hover:text-[#000000] transition-colors p-1"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-[#A0A0A0] hover:text-[#000000] transition-colors p-1 cursor-pointer"
                     aria-label="Toggle password visibility"
                   >
                     {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
@@ -303,7 +133,7 @@ function LoginFormContent() {
               </div>
 
               {/* Remember me & Forgot Password */}
-              <div className="flex items-center justify-between text-sm pt-1">
+              <div className="flex items-center justify-between text-sm sm:text-base pt-1">
                 <label className="flex items-center gap-2.5 cursor-pointer select-none text-[#000000]">
                   <input
                     type="checkbox"
@@ -316,10 +146,10 @@ function LoginFormContent() {
 
                 <button
                   type="button"
-                  onClick={() => toast.info(`Kredensial demo: ${activeProfile.email} / ${activeProfile.password}`)}
-                  className="text-xs sm:text-sm font-medium text-[#000000] hover:text-[#CE3627] hover:underline"
+                  onClick={() => toast.info('Fitur reset kata sandi dikirimkan ke email Anda.')}
+                  className="text-xs sm:text-sm font-medium text-[#000000] hover:text-[#CE3627] hover:underline cursor-pointer"
                 >
-                  View demo credentials
+                  Forgot Password
                 </button>
               </div>
 
@@ -327,27 +157,26 @@ function LoginFormContent() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full h-[47px] rounded-full bg-[#CE3627] hover:bg-[#B72E20] text-white text-base sm:text-lg font-medium transition-colors shadow-sm flex items-center justify-center cursor-pointer disabled:opacity-60 mt-1"
+                className="w-full h-[47px] rounded-full bg-[#CE3627] hover:bg-[#B72E20] text-white text-base sm:text-lg font-medium transition-colors shadow-sm flex items-center justify-center cursor-pointer disabled:opacity-60 mt-2"
               >
-                {isLoading ? 'Signing in...' : `Login as ${activeProfile.label}`}
+                {isLoading ? 'Signing in...' : 'Login'}
               </button>
             </form>
 
             {/* Divider */}
             <div className="flex items-center gap-4 my-5">
               <div className="flex-1 h-[1px] bg-[#E8E8E8]" />
-              <span className="text-xs text-[#A0A0A0]">or login with</span>
+              <span className="text-sm text-[#A0A0A0]">or login with</span>
               <div className="flex-1 h-[1px] bg-[#E8E8E8]" />
             </div>
 
             {/* Social Logins */}
             <div className="grid grid-cols-2 gap-3 sm:gap-4">
-              {/* Google Button opens GoogleAuthModal with Real Account support */}
               <button
                 type="button"
                 onClick={() => setIsGoogleModalOpen(true)}
-                className="w-full h-[47px] rounded-full border border-[#E8E8E8] bg-white hover:bg-[#F6F6F6] hover:border-[#1a73e8]/40 text-sm sm:text-base font-medium text-[#000000] flex items-center justify-center gap-2.5 transition-all cursor-pointer shadow-xs"
-                title="Login dengan Akun Google Real (Google Identity Services)"
+                className="w-full h-[47px] rounded-full border border-[#E8E8E8] bg-white hover:bg-[#F6F6F6] text-sm sm:text-base font-medium text-[#000000] flex items-center justify-center gap-2.5 transition-colors cursor-pointer shadow-xs"
+                title="Login dengan Akun Google"
               >
                 <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24">
                   <path
@@ -384,7 +213,7 @@ function LoginFormContent() {
           </div>
 
           {/* Bottom Prompt */}
-          <div className="pt-6 text-center text-sm text-[#A0A0A0]">
+          <div className="pt-6 text-center text-sm sm:text-base text-[#A0A0A0]">
             Don’t have an account?{' '}
             <Link href="/register" className="font-medium text-[#000000] hover:text-[#CE3627] underline">
               Register now
@@ -392,7 +221,7 @@ function LoginFormContent() {
           </div>
         </div>
 
-        {/* Right Side: Hero Visual Frame (Dynamically Adapts to Active Role) */}
+        {/* Right Side: Hero Visual Frame (Figma Screen 9:3678 Right Hero) */}
         <div className="bg-[#4A1512] rounded-[32px] sm:rounded-[40px] p-6 sm:p-10 lg:p-14 text-white flex flex-col justify-between relative overflow-hidden shadow-xl">
           {/* Subtle background glow */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-[#CE3627]/25 rounded-full blur-3xl pointer-events-none" />
@@ -412,45 +241,37 @@ function LoginFormContent() {
           </div>
 
           {/* Figma Live Operational Showcase Card */}
-          <div className="relative z-10 my-8 bg-white rounded-[28px] p-6 sm:p-7 text-[#000000] shadow-2xl border border-white/20 transition-all duration-300">
+          <div className="relative z-10 my-8 bg-white rounded-[28px] p-6 sm:p-7 text-[#000000] shadow-2xl border border-white/20">
             <div className="flex items-center justify-between pb-4 border-b border-[#E2E2E2]">
               <div className="flex items-center gap-3">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={activeProfile.avatar}
-                  alt={activeProfile.name}
-                  className="w-11 h-11 rounded-full object-cover border-2 shadow-xs"
-                  style={{ borderColor: activeProfile.tagColor }}
+                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80"
+                  alt="Raihan Fahreza"
+                  className="w-11 h-11 rounded-full object-cover border-2 border-[#CE3627] shadow-xs"
                 />
                 <div>
-                  <h4 className="font-bold text-sm text-[#000000]">{activeProfile.name}</h4>
-                  <p className="text-xs text-[#71717A]">{activeProfile.title}</p>
+                  <h4 className="font-bold text-sm text-[#000000]">Raihan Fahreza</h4>
+                  <p className="text-xs text-[#71717A]">Store Owner • Nordic Furniture</p>
                 </div>
               </div>
 
-              <span
-                className="text-xs font-bold px-3 py-1 rounded-full uppercase"
-                style={{
-                  backgroundColor: activeProfile.tagBg,
-                  color: activeProfile.tagColor,
-                  border: `1px solid ${activeProfile.tagBorder}`,
-                }}
-              >
-                {activeProfile.badge}
+              <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#FEF1ED] text-[#CE3627] border border-[#F7D7D1]">
+                Owner Access
               </span>
             </div>
 
             <div className="grid grid-cols-2 gap-4 py-4">
               <div className="p-3.5 rounded-2xl bg-[#F6F6F6]">
-                <p className="text-xs text-[#71717A]">{activeProfile.stat1Label}</p>
-                <p className="text-xl font-bold text-[#000000] mt-1">{activeProfile.stat1Value}</p>
-                <p className="text-[11px] text-[#0E8F21] font-semibold mt-1">{activeProfile.stat1Sub}</p>
+                <p className="text-xs text-[#71717A]">Total Revenue</p>
+                <p className="text-xl font-bold text-[#000000] mt-1">$432,500</p>
+                <p className="text-[11px] text-[#0E8F21] font-semibold mt-1">↑ 12% vs last month</p>
               </div>
 
               <div className="p-3.5 rounded-2xl bg-[#F6F6F6]">
-                <p className="text-xs text-[#71717A]">{activeProfile.stat2Label}</p>
-                <p className="text-xl font-bold text-[#CE3627] mt-1">{activeProfile.stat2Value}</p>
-                <p className="text-[11px] text-[#71717A] mt-1">{activeProfile.stat2Sub}</p>
+                <p className="text-xs text-[#71717A]">Active Orders</p>
+                <p className="text-xl font-bold text-[#CE3627] mt-1">1,280 pcs</p>
+                <p className="text-[11px] text-[#71717A] mt-1">Ready for fulfillment</p>
               </div>
             </div>
 
@@ -466,21 +287,20 @@ function LoginFormContent() {
           <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-white/80">
             <div className="flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-[#FF7A6B] shrink-0" />
-              <span>{activeProfile.highlights[0]}</span>
+              <span>Direct access to sales &amp; orders</span>
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-[#FF7A6B] shrink-0" />
-              <span>{activeProfile.highlights[1]}</span>
+              <span>Full store settings &amp; RBAC control</span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Google Real Account Auth Modal */}
+      {/* Google Auth Modal */}
       <GoogleAuthModal
         isOpen={isGoogleModalOpen}
         onClose={() => setIsGoogleModalOpen(false)}
-        defaultRole={selectedRole}
         redirectPath={redirectPath}
       />
     </div>

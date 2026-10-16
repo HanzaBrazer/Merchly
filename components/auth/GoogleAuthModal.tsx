@@ -25,19 +25,19 @@ interface SavedGoogleAccount {
 const DEFAULT_GOOGLE_ACCOUNTS: SavedGoogleAccount[] = [
   {
     name: 'Raihan Fahreza',
-    email: 'raihan.fahreza@gmail.com',
+    email: 'raihanfahreza04@gmail.com',
     role: 'owner',
     avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80',
   },
   {
-    name: 'Dimas Pratama',
-    email: 'dimas.pratama@gmail.com',
+    name: 'Raihan Reza',
+    email: 'raihanreza004@gmail.com',
     role: 'admin',
     avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&auto=format&fit=crop&q=80',
   },
   {
     name: 'Sarah Amelia',
-    email: 'sarah.amelia@gmail.com',
+    email: 'staff@merchly.com',
     role: 'staff',
     avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&auto=format&fit=crop&q=80',
   },
@@ -146,10 +146,17 @@ export function GoogleAuthModal({
       formattedName
     )}&background=4285F4&color=fff&size=128&bold=true`;
 
+    let finalRole = selectedRole;
+    if (trimmedEmail.toLowerCase() === 'raihanfahreza04@gmail.com') {
+      finalRole = 'owner';
+    } else if (trimmedEmail.toLowerCase() === 'raihanreza004@gmail.com') {
+      finalRole = 'admin';
+    }
+
     const newAcc: SavedGoogleAccount = {
       name: formattedName,
       email: trimmedEmail,
-      role: selectedRole,
+      role: finalRole,
       avatar: avatarUrl,
     };
 

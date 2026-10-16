@@ -15,6 +15,7 @@ import {
   ProductStatus,
   CurrentUser,
   MemberRole,
+  WorkspaceInvite,
 } from './types';
 import {
   initialWorkspace,
@@ -43,6 +44,9 @@ interface MerchlyContextType {
   conversations: Conversation[];
   integrations: Integration[];
   teamMembers: TeamMember[];
+  invitations: WorkspaceInvite[];
+  createInvitation: (email: string, role: MemberRole) => WorkspaceInvite;
+  acceptInvitation: (token: string, name: string) => boolean;
   activeChatId: string;
   isUpgradeModalOpen: boolean;
   isNewOrderModalOpen: boolean;
@@ -104,6 +108,32 @@ export function MerchlyProvider({ children }: { children: ReactNode }) {
   const [conversations, setConversations] = useState<Conversation[]>(initialConversations);
   const [integrations, setIntegrations] = useState<Integration[]>(initialIntegrations);
   const [teamMembers, setTeamMembers] = useState<TeamMember[]>(initialTeamMembers);
+  const [invitations, setInvitations] = useState<WorkspaceInvite[]>([
+    {
+      id: 'inv-01',
+      workspaceId: 'ws-nordic-01',
+      workspaceName: 'Nordic Furniture',
+      email: 'staff@merchly.com',
+      role: 'staff',
+      invitedBy: 'Raihan Fahreza',
+      token: 'inv_demo_staff',
+      createdAt: '2026-10-15',
+      expiresAt: '2026-10-22',
+      status: 'pending',
+    },
+    {
+      id: 'inv-02',
+      workspaceId: 'ws-nordic-01',
+      workspaceName: 'Nordic Furniture',
+      email: 'raihanreza004@gmail.com',
+      role: 'admin',
+      invitedBy: 'Raihan Fahreza',
+      token: 'inv_demo_admin',
+      createdAt: '2026-10-15',
+      expiresAt: '2026-10-22',
+      status: 'pending',
+    },
+  ]);
 
   const [activeChatId, setActiveChatId] = useState<string>('chat-01');
   const [isUpgradeModalOpen, setIsUpgradeModalOpen] = useState(false);
@@ -148,7 +178,7 @@ export function MerchlyProvider({ children }: { children: ReactNode }) {
     let finalRole: MemberRole = role || 'owner';
     if (!role) {
       const lower = finalEmail.toLowerCase();
-      if (lower.includes('admin') || lower.includes('dimas')) {
+      if (lower === 'raihanreza004@gmail.com' || lower.includes('admin') || lower.includes('dimas')) {
         finalRole = 'admin';
       } else if (lower.includes('staff') || lower.includes('sarah')) {
         finalRole = 'staff';
@@ -160,7 +190,7 @@ export function MerchlyProvider({ children }: { children: ReactNode }) {
     let finalName = name;
     if (!finalName) {
       if (finalRole === 'admin') {
-        finalName = 'Dimas Pratama';
+        finalName = finalEmail === 'raihanreza004@gmail.com' ? 'Raihan Reza' : 'Dimas Pratama';
       } else if (finalRole === 'staff') {
         finalName = 'Sarah Amelia';
       } else {
@@ -190,6 +220,11 @@ export function MerchlyProvider({ children }: { children: ReactNode }) {
     setIsAuthenticated(true);
     try {
       localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(user));
+      if (typeof document !== 'undefined') {
+        document.cookie = `merchly_auth=true; path=/; max-age=604800; SameSite=Lax`;
+        document.cookie = `merchly_role=${user.role}; path=/; max-age=604800; SameSite=Lax`;
+        document.cookie = `merchly_has_ws=true; path=/; max-age=604800; SameSite=Lax`;
+      }
     } catch (e) {
       console.error(e);
     }
@@ -201,6 +236,11 @@ export function MerchlyProvider({ children }: { children: ReactNode }) {
     setIsLogoutModalOpen(false);
     try {
       localStorage.removeItem(AUTH_STORAGE_KEY);
+      if (typeof document !== 'undefined') {
+        document.cookie = `merchly_auth=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
+        document.cookie = `merchly_role=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
+        document.cookie = `merchly_has_ws=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
+      }
     } catch (e) {
       console.error(e);
     }
@@ -605,6 +645,57 @@ export function MerchlyProvider({ children }: { children: ReactNode }) {
     return true;
   };
 
+  const createInvitation = (email: string, role: MemberRole): WorkspaceInvite => {
+    const token = 'inv_' + Math.random().toString(36).substring(2, 10);
+    const newInv: WorkspaceInvite = {
+      id: `inv-${Date.now()}`,
+      workspaceId: workspace.id,
+      workspaceName: workspace.name,
+      email: email.trim(),
+      role: role,
+      invitedBy: currentUser?.name || 'Raihan Fahreza',
+      token: token,
+      createdAt: new Date().toISOString().split('T')[0],
+      expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+      status: 'pending',
+    };
+    const updated = [newInv, ...invitations];
+    setInvitations(updated);
+    toast.success(`Undangan berhasil dibuat untuk ${email} sebagai ${role.toUpperCase()}`);
+    return newInv;
+  };
+
+  const acceptInvitation = (token: string, name: string): boolean => {
+    const inv = invitations.find((i) => i.token === token);
+    if (!inv) {
+      toast.error('Token undangan tidak ditemukan atau sudah kedaluwarsa.');
+      return false;
+    }
+
+    const newMember: TeamMember = {
+      id: `user-${Date.now()}`,
+      name: name,
+      email: inv.email,
+      role: inv.role,
+      joinedAt: new Date().toISOString().split('T')[0],
+      avatar: inv.role === 'admin'
+        ? 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120'
+        : 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120',
+    };
+    const updatedTeam = [...teamMembers.filter((m) => m.email !== inv.email), newMember];
+    setTeamMembers(updatedTeam);
+    saveState({ teamMembers: updatedTeam });
+
+    const updatedInvs = invitations.map((i) =>
+      i.token === token ? { ...i, status: 'accepted' as const } : i
+    );
+    setInvitations(updatedInvs);
+
+    login(inv.email, name, inv.role, newMember.avatar);
+    toast.success(`Selamat bergabung di ${inv.workspaceName} sebagai ${inv.role.toUpperCase()}!`);
+    return true;
+  };
+
   const resetToInitialDemo = () => {
     localStorage.removeItem(STORAGE_KEY);
     setWorkspace(initialWorkspace);
@@ -658,6 +749,9 @@ export function MerchlyProvider({ children }: { children: ReactNode }) {
         toggleIntegration,
         upgradePlan,
         inviteTeamMember,
+        invitations,
+        createInvitation,
+        acceptInvitation,
         resetToInitialDemo,
       }}
     >

@@ -117,5 +117,19 @@ export interface CurrentUser {
   email: string;
   role: MemberRole;
   avatar: string;
+  workspaceId?: string;
+}
+
+export interface WorkspaceInvite {
+  id: string;
+  workspaceId: string;
+  workspaceName: string;
+  email: string;
+  role: MemberRole;
+  invitedBy: string;
+  token: string;
+  createdAt: string;
+  expiresAt: string;
+  status: 'pending' | 'accepted' | 'expired';
 }
 

@@ -14,7 +14,7 @@ export const initialTeamMembers: TeamMember[] = [
   {
     id: 'user-raihan-01',
     name: 'Raihan Fahreza',
-    email: 'raihan@merchly.com',
+    email: 'raihanfahreza04@gmail.com',
     role: 'owner',
     avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80',
     joinedAt: '2025-01-10',
@@ -22,7 +22,7 @@ export const initialTeamMembers: TeamMember[] = [
   {
     id: 'user-dimas-02',
     name: 'Dimas Pratama',
-    email: 'admin@merchly.com',
+    email: 'raihanreza004@gmail.com',
     role: 'admin',
     avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&auto=format&fit=crop&q=80',
     joinedAt: '2025-02-01',
