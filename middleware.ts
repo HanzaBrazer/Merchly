@@ -9,7 +9,7 @@ export function middleware(request: NextRequest) {
   const hasWsCookie = request.cookies.get('merchly_has_ws')?.value;
 
   const isAuthenticated = Boolean(authCookie === 'true');
-  const userRole = roleCookie || 'owner';
+  const userRole = (roleCookie || 'owner').toLowerCase();
 
   // 1. Protect /dashboard routes (DESIGN.md §14: Belum login dialihkan ke /login)
   if (pathname.startsWith('/dashboard')) {
@@ -19,12 +19,14 @@ export function middleware(request: NextRequest) {
       return NextResponse.redirect(loginUrl);
     }
 
+    const tabParam = request.nextUrl.searchParams.get('tab') || '';
+
     // 2. Role-based Server Route Protection (DESIGN.md §12 & §15)
     // Staff restricted routes (403 Forbidden protection)
     if (userRole === 'staff') {
       if (
         pathname.startsWith('/dashboard/integrations') ||
-        pathname.includes('billing')
+        (pathname.startsWith('/dashboard/settings') && ['team', 'billing', 'workspace'].includes(tabParam))
       ) {
         const forbiddenUrl = new URL('/dashboard', request.url);
         forbiddenUrl.searchParams.set('error', '403_forbidden_staff_restricted');
@@ -33,10 +35,13 @@ export function middleware(request: NextRequest) {
     }
 
     // Admin restricted routes (No Billing access per §15)
-    if (userRole === 'admin' && pathname.includes('billing')) {
-      const forbiddenUrl = new URL('/dashboard', request.url);
-      forbiddenUrl.searchParams.set('error', '403_forbidden_admin_no_billing');
-      return NextResponse.redirect(forbiddenUrl);
+    if (userRole === 'admin') {
+      if (pathname.startsWith('/dashboard/settings') && tabParam === 'billing') {
+        const forbiddenUrl = new URL('/dashboard/settings', request.url);
+        forbiddenUrl.searchParams.set('tab', 'profile');
+        forbiddenUrl.searchParams.set('error', '403_forbidden_admin_no_billing');
+        return NextResponse.redirect(forbiddenUrl);
+      }
     }
 
     return NextResponse.next();
