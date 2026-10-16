@@ -168,17 +168,47 @@ export function MerchlyProvider({ children }: { children: ReactNode }) {
         if (parsed.teamMembers) setTeamMembers(parsed.teamMembers);
       }
 
-      // If no saved localStorage auth, check active Supabase OAuth session
-      if (isSupabaseConfigured && !savedAuth) {
+      // Sync active Supabase OAuth session automatically
+      if (isSupabaseConfigured) {
         supabase.auth.getSession().then(({ data: { session } }) => {
           if (session?.user) {
-            const email = session.user.email || '';
+            const email = (session.user.email || '').trim().toLowerCase();
             const metadata = session.user.user_metadata || {};
             const name = metadata.full_name || metadata.name || email.split('@')[0];
             const avatar = metadata.avatar_url || metadata.picture;
-            login(email, name, metadata.role, avatar);
+            let role: MemberRole = 'owner';
+            if (email === 'raihanreza004@gmail.com') {
+              role = 'admin';
+            } else if (email === 'raihanfahreza04@gmail.com') {
+              role = 'owner';
+            } else if (metadata.role) {
+              role = metadata.role;
+            }
+            login(email, name, role, avatar);
           }
         });
+
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+          if (session?.user && (event === 'SIGNED_IN' || event === 'USER_UPDATED')) {
+            const email = (session.user.email || '').trim().toLowerCase();
+            const metadata = session.user.user_metadata || {};
+            const name = metadata.full_name || metadata.name || email.split('@')[0];
+            const avatar = metadata.avatar_url || metadata.picture;
+            let role: MemberRole = 'owner';
+            if (email === 'raihanreza004@gmail.com') {
+              role = 'admin';
+            } else if (email === 'raihanfahreza04@gmail.com') {
+              role = 'owner';
+            } else if (metadata.role) {
+              role = metadata.role;
+            }
+            login(email, name, role, avatar);
+          }
+        });
+
+        return () => {
+          subscription.unsubscribe();
+        };
       }
     } catch (e) {
       console.warn('Could not read from localStorage', e);
