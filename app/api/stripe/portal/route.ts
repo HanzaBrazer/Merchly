@@ -7,8 +7,9 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_placeholder'
 
 export async function POST(req: Request) {
   try {
-    const { customerId } = await req.json();
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+    const { customerId } = await req.json().catch(() => ({ customerId: 'cus_test_mock' }));
+    const origin = req.headers.get('origin') || process.env.NEXT_PUBLIC_APP_URL || 'https://merchlysaas.vercel.app';
+    const appUrl = origin;
 
     if (!process.env.STRIPE_SECRET_KEY || process.env.STRIPE_SECRET_KEY.includes('placeholder')) {
       return NextResponse.json({

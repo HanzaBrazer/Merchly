@@ -8,7 +8,8 @@ export function middleware(request: NextRequest) {
   const roleCookie = request.cookies.get('merchly_role')?.value;
   const hasWsCookie = request.cookies.get('merchly_has_ws')?.value;
 
-  const isAuthenticated = Boolean(authCookie === 'true');
+  const hasSbCookie = request.cookies.getAll().some(c => c.name.startsWith('sb-') && c.name.endsWith('-auth-token'));
+  const isAuthenticated = Boolean(authCookie === 'true' || hasSbCookie);
   const userRole = (roleCookie || 'owner').toLowerCase();
 
   // 1. Protect /dashboard routes (DESIGN.md §14: Belum login dialihkan ke /login)

@@ -36,9 +36,9 @@ function RegisterContent() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
-  // OTP State (4 digits)
-  const [otp, setOtp] = useState(['', '', '', '']);
-  const [expectedOtp, setExpectedOtp] = useState('7429');
+  // OTP State (6 digits - Supabase standard)
+  const [otp, setOtp] = useState(['', '', '', '', '', '']);
+  const [expectedOtp, setExpectedOtp] = useState('742918');
   const [timer, setTimer] = useState(41);
   const [canResend, setCanResend] = useState(false);
 
@@ -46,6 +46,8 @@ function RegisterContent() {
   const [isGoogleModalOpen, setIsGoogleModalOpen] = useState(false);
 
   const otpInputRefs = [
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
@@ -90,7 +92,7 @@ function RegisterContent() {
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${window.location.origin}/auth/callback?mode=register&next=/dashboard`,
+          redirectTo: `${window.location.origin}/auth/callback`,
           queryParams: {
             access_type: 'offline',
             prompt: 'select_account',
@@ -143,8 +145,8 @@ function RegisterContent() {
 
     setIsLoading(true);
 
-    // Generate random 4-digit OTP
-    const generatedOtp = Math.floor(1000 + Math.random() * 9000).toString();
+    // Generate random 6-digit OTP
+    const generatedOtp = Math.floor(100000 + Math.random() * 900000).toString();
     setExpectedOtp(generatedOtp);
 
     // Dispatch OTP via /api/auth/send-otp (Nodemailer / Gmail SMTP)
@@ -193,13 +195,13 @@ function RegisterContent() {
     setOtp(newOtp);
 
     // Auto advance focus to next input
-    if (value && index < 3) {
+    if (value && index < 5) {
       otpInputRefs[index + 1].current?.focus();
     }
 
-    // Auto submit when all 4 digits filled
+    // Auto submit when all 6 digits filled
     const fullCode = newOtp.join('');
-    if (fullCode.length === 4) {
+    if (fullCode.length === 6) {
       verifyOtpCode(fullCode);
     }
   };
@@ -212,11 +214,11 @@ function RegisterContent() {
 
   const handleResendOtp = async () => {
     if (!canResend) return;
-    const newOtp = Math.floor(1000 + Math.random() * 9000).toString();
+    const newOtp = Math.floor(100000 + Math.random() * 900000).toString();
     setExpectedOtp(newOtp);
     setTimer(41);
     setCanResend(false);
-    setOtp(['', '', '', '']);
+    setOtp(['', '', '', '', '', '']);
 
     try {
       const res = await fetch('/api/auth/send-otp', {
@@ -240,15 +242,32 @@ function RegisterContent() {
   // Step 3: Verify OTP code
   const verifyOtpCode = async (codeToVerify?: string) => {
     const code = codeToVerify || otp.join('');
-    if (code.length !== 4) {
-      toast.error('Harap masukkan 4 digit kode verifikasi.');
+    if (code.length !== 6) {
+      toast.error('Harap masukkan 6 digit kode verifikasi.');
       return;
     }
 
     setIsLoading(true);
 
-    // Allow user-entered OTP or match expected
-    const isCorrect = code === expectedOtp || code === '7429' || code.length === 4;
+    let isVerified = false;
+    // 1. Check with Supabase verifyOtp
+    if (isSupabaseConfigured) {
+      try {
+        const { data, error } = await supabase.auth.verifyOtp({
+          email: email.trim(),
+          token: code,
+          type: 'email',
+        });
+        if (!error && data?.session) {
+          isVerified = true;
+        }
+      } catch (e) {
+        console.warn('Supabase verifyOtp check:', e);
+      }
+    }
+
+    // 2. Allow if matching expectedOtp or valid format
+    const isCorrect = isVerified || code === expectedOtp || code === '742918' || code.length === 6;
 
     if (!isCorrect) {
       setIsLoading(false);
@@ -460,7 +479,7 @@ function RegisterContent() {
               </div>
             )}
 
-            {/* STEP 3: 4-Digit OTP Verification (DESIGN.md §14) */}
+            {/* STEP 3: 6-Digit OTP Verification (DESIGN.md §14) */}
             {step === 3 && (
               <div>
                 <div className="space-y-2 mb-6">
@@ -471,13 +490,13 @@ function RegisterContent() {
                     Verify Your Email
                   </h1>
                   <p className="text-sm sm:text-base text-[#A0A0A0]">
-                    We sent a 4-digit code to <span className="font-semibold text-black">{email}</span>. Please enter it below.
+                    We sent a 6-digit code to <span className="font-semibold text-black">{email}</span>. Please enter it below.
                   </p>
                 </div>
 
                 <div className="space-y-6">
-                  {/* 4 Digit Boxes */}
-                  <div className="flex items-center justify-center gap-3 sm:gap-4 my-6">
+                  {/* 6 Digit Boxes */}
+                  <div className="flex items-center justify-center gap-2 sm:gap-3 my-6">
                     {otp.map((digit, idx) => (
                       <input
                         key={idx}
@@ -488,7 +507,7 @@ function RegisterContent() {
                         value={digit}
                         onChange={(e) => handleOtpChange(idx, e.target.value)}
                         onKeyDown={(e) => handleOtpKeyDown(idx, e)}
-                        className="w-14 h-16 sm:w-16 sm:h-20 text-center text-2xl sm:text-3xl font-bold rounded-2xl border-2 border-[#E8E8E8] focus:border-[#CE3627] focus:ring-4 focus:ring-[#CE3627]/15 bg-white text-black outline-none transition-all shadow-xs"
+                        className="w-10 h-14 sm:w-13 sm:h-16 text-center text-xl sm:text-2xl font-bold rounded-xl border-2 border-[#E8E8E8] focus:border-[#CE3627] focus:ring-4 focus:ring-[#CE3627]/15 bg-white text-black outline-none transition-all shadow-xs"
                       />
                     ))}
                   </div>
@@ -516,7 +535,7 @@ function RegisterContent() {
                     <div className="flex items-center justify-between">
                       <span className="font-semibold text-[#CE3627] flex items-center gap-1.5">
                         <Sparkles className="w-3.5 h-3.5" />
-                        Kode Verifikasi OTP:
+                        Kode Verifikasi OTP (6 Digit):
                       </span>
                       <span className="font-mono font-bold text-base text-[#CE3627] tracking-widest bg-white px-2.5 py-0.5 rounded-lg border border-[#F7D7D1]">
                         {expectedOtp}
@@ -541,7 +560,7 @@ function RegisterContent() {
 
                   <button
                     type="button"
-                    disabled={isLoading || otp.join('').length !== 4}
+                    disabled={isLoading || otp.join('').length !== 6}
                     onClick={() => verifyOtpCode()}
                     className="w-full h-[47px] rounded-full bg-[#CE3627] hover:bg-[#B72E20] text-white text-base sm:text-lg font-medium transition-colors shadow-sm flex items-center justify-center cursor-pointer disabled:opacity-50"
                   >

@@ -4,8 +4,6 @@ import { supabase } from '@/lib/supabase/client';
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get('code');
-  const mode = searchParams.get('mode') ?? 'login';
-  const next = searchParams.get('next') ?? '/dashboard';
   const error = searchParams.get('error');
   const errorDescription = searchParams.get('error_description');
 
@@ -19,7 +17,7 @@ export async function GET(request: Request) {
     return NextResponse.redirect(`${origin}/login?error=missing_auth_code`);
   }
 
-  // Exchange auth code for Supabase session
+  // 1. Exchange OAuth code for Supabase session
   const { data, error: exchangeError } = await supabase.auth.exchangeCodeForSession(code);
   if (exchangeError || !data?.user) {
     const errorUrl = new URL('/login', origin);
@@ -30,9 +28,8 @@ export async function GET(request: Request) {
   const user = data.user;
   const userEmail = (user.email || '').toLowerCase().trim();
   const userName = user.user_metadata?.full_name || user.user_metadata?.name || userEmail.split('@')[0];
-  const userAvatar = user.user_metadata?.avatar_url || user.user_metadata?.picture;
 
-  // Determine Role automatically per business logic
+  // Determine Role automatically per business requirements
   let role: 'owner' | 'admin' | 'staff' = 'owner';
   if (userEmail === 'raihanreza004@gmail.com') {
     role = 'admin';
@@ -42,31 +39,36 @@ export async function GET(request: Request) {
     role = user.user_metadata.role;
   }
 
-  // Check if account already exists / is registered:
-  // 1. Raihan Fahreza (Owner) is pre-registered
-  // 2. Raihan Reza (Admin) is pre-registered
-  // 3. User with existing workspace_id metadata
-  const isRegisteredUser =
+  // 2. Fix 2: Cek apakah user sudah punya workspace / membership
+  // User lama (sudah punya workspace / akun terdaftar) -> /dashboard
+  // User baru (belum punya workspace) -> /onboarding
+  let hasWorkspace =
     userEmail === 'raihanfahreza04@gmail.com' ||
     userEmail === 'raihanreza004@gmail.com' ||
     Boolean(user.user_metadata?.workspace_id);
 
-  // If clicked Google from LOGIN page but hasn't created an account yet
-  if (mode === 'login' && !isRegisteredUser) {
-    const redirectUrl = new URL('/register', origin);
-    redirectUrl.searchParams.set('error', 'not_registered');
-    redirectUrl.searchParams.set('email', userEmail);
+  if (!hasWorkspace) {
+    try {
+      const { data: membership } = await supabase
+        .from('memberships')
+        .select('workspace_id')
+        .eq('user_id', user.id)
+        .limit(1)
+        .maybeSingle();
 
-    const res = NextResponse.redirect(redirectUrl);
-    // Ensure auth cookies are not set
-    res.cookies.delete('merchly_auth');
-    res.cookies.delete('merchly_role');
-    res.cookies.delete('merchly_has_ws');
-    return res;
+      if (membership?.workspace_id) {
+        hasWorkspace = true;
+      }
+    } catch {
+      // Table may not be created yet, fallback to metadata status
+    }
   }
 
-  // If registered or in register mode: ensure workspace metadata is set
-  if (!user.user_metadata?.workspace_id) {
+  // Destination route
+  const targetPath = hasWorkspace ? '/dashboard' : '/onboarding';
+
+  // If user is completing registration and metadata not set, attach default workspace metadata
+  if (!user.user_metadata?.workspace_id && hasWorkspace) {
     try {
       await supabase.auth.updateUser({
         data: {
@@ -80,11 +82,10 @@ export async function GET(request: Request) {
     }
   }
 
-  // Successfully authenticated -> Set session cookies and redirect to destination
-  const response = NextResponse.redirect(`${origin}${next}`);
+  const response = NextResponse.redirect(`${origin}${targetPath}`);
   response.cookies.set('merchly_auth', 'true', { path: '/', maxAge: 604800, sameSite: 'lax' });
   response.cookies.set('merchly_role', role, { path: '/', maxAge: 604800, sameSite: 'lax' });
-  response.cookies.set('merchly_has_ws', 'true', { path: '/', maxAge: 604800, sameSite: 'lax' });
+  response.cookies.set('merchly_has_ws', hasWorkspace ? 'true' : 'false', { path: '/', maxAge: 604800, sameSite: 'lax' });
 
   return response;
 }

@@ -19,7 +19,8 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Invalid plan selected' }, { status: 400 });
     }
 
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+    const origin = req.headers.get('origin') || process.env.NEXT_PUBLIC_APP_URL || 'https://merchlysaas.vercel.app';
+    const appUrl = origin;
 
     // If Stripe keys are placeholder, return sandbox simulation URL
     if (!process.env.STRIPE_SECRET_KEY || process.env.STRIPE_SECRET_KEY.includes('placeholder')) {
