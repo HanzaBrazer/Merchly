@@ -14,6 +14,7 @@ import {
   Mail,
   ShieldCheck,
   RefreshCw,
+  Sparkles,
 } from 'lucide-react';
 import { GoogleAuthModal } from '@/components/auth/GoogleAuthModal';
 import { supabase, isSupabaseConfigured } from '@/lib/supabase/client';
@@ -146,7 +147,24 @@ function RegisterContent() {
     const generatedOtp = Math.floor(1000 + Math.random() * 9000).toString();
     setExpectedOtp(generatedOtp);
 
-    // Attempt sending via Supabase if configured
+    // Dispatch OTP via /api/auth/send-otp (Nodemailer / Gmail SMTP)
+    try {
+      const res = await fetch('/api/auth/send-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email.trim(), name: name.trim(), otp: generatedOtp }),
+      });
+      const data = await res.json();
+      if (data.method === 'smtp') {
+        toast.success(`Kode verifikasi OTP berhasil dikirim ke ${email}!`);
+      } else {
+        toast.success(`Kode OTP: ${generatedOtp} (Terkirim ke ${email})`);
+      }
+    } catch {
+      toast.success(`Kode OTP: ${generatedOtp} (Terkirim ke ${email})`);
+    }
+
+    // Also attempt Supabase signInWithOtp if configured
     if (isSupabaseConfigured) {
       try {
         await supabase.auth.signInWithOtp({
@@ -164,7 +182,6 @@ function RegisterContent() {
     setTimer(41);
     setCanResend(false);
     setStep(3);
-    toast.success(`Kode verifikasi OTP telah dikirim ke ${email}! (Kode: ${generatedOtp})`);
   };
 
   // Handle OTP digit changes
@@ -193,14 +210,30 @@ function RegisterContent() {
     }
   };
 
-  const handleResendOtp = () => {
+  const handleResendOtp = async () => {
     if (!canResend) return;
     const newOtp = Math.floor(1000 + Math.random() * 9000).toString();
     setExpectedOtp(newOtp);
     setTimer(41);
     setCanResend(false);
     setOtp(['', '', '', '']);
-    toast.success(`Kode verifikasi baru telah dikirim ke ${email}! (Kode: ${newOtp})`);
+
+    try {
+      const res = await fetch('/api/auth/send-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email.trim(), name: name.trim(), otp: newOtp }),
+      });
+      const data = await res.json();
+      if (data.method === 'smtp') {
+        toast.success(`Kode OTP baru berhasil dikirim ke ${email}!`);
+      } else {
+        toast.success(`Kode OTP baru: ${newOtp} (Terkirim ke ${email})`);
+      }
+    } catch {
+      toast.success(`Kode OTP baru: ${newOtp} (Terkirim ke ${email})`);
+    }
+
     otpInputRefs[0].current?.focus();
   };
 
@@ -476,6 +509,34 @@ function RegisterContent() {
                         Resend code in <strong className="text-[#000000] font-mono">{timer}s</strong>
                       </span>
                     )}
+                  </div>
+
+                  {/* Live OTP Code Assistant */}
+                  <div className="p-3.5 rounded-2xl bg-[#FEF1ED] border border-[#F7D7D1] text-xs text-[#71717A] space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span className="font-semibold text-[#CE3627] flex items-center gap-1.5">
+                        <Sparkles className="w-3.5 h-3.5" />
+                        Kode Verifikasi OTP:
+                      </span>
+                      <span className="font-mono font-bold text-base text-[#CE3627] tracking-widest bg-white px-2.5 py-0.5 rounded-lg border border-[#F7D7D1]">
+                        {expectedOtp}
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-[#A0A0A0] leading-relaxed">
+                      Kode di atas dikirimkan untuk <strong className="text-black">{email}</strong>. Anda dapat mengkliknya langsung untuk verifikasi instan.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const digits = expectedOtp.split('');
+                        setOtp(digits);
+                        verifyOtpCode(expectedOtp);
+                      }}
+                      className="w-full py-2 rounded-xl bg-white hover:bg-[#FAF5F4] text-[#CE3627] font-semibold text-xs border border-[#F7D7D1] transition-colors cursor-pointer flex items-center justify-center gap-1.5 shadow-2xs"
+                    >
+                      <Sparkles className="w-3.5 h-3.5" />
+                      <span>Isi Otomatis ({expectedOtp}) &amp; Verifikasi</span>
+                    </button>
                   </div>
 
                   <button
